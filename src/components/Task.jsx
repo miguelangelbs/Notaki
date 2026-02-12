@@ -2,18 +2,17 @@ import { Card, IconButton, Text, DropdownMenu } from "@radix-ui/themes"
 import { DotsVerticalIcon } from "@radix-ui/react-icons"
 
 
-export const Task = ({ titulo, descripcion, fecha}) => {
+export const Task = ({ titulo="NombreEjemplo", descripcion="DescEjemlo", fecha="01/01/2000"}) => {
   return (
     <>
       <Card style={{ position: "relative" }}>
         <DropdownMenu.Root>
           <DropdownMenu.Trigger asChild>
-            <IconButton size="2" variant="ghost"
+            <IconButton size="2" variant="ghost" radius="full"
               style={{
                 position: "absolute",
                 top: 8,
-                right: 8,
-                borderRadius: "100%",
+                right: 8
               }}
               aria-label="Más opciones"
             >

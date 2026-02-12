@@ -1,12 +1,11 @@
 import { Board } from "./components/Board"
-import { Column } from "./components/Column"
+import { Brick } from "./components/Brick"
 import { Task } from "./components/Task"
-import data from "./utils/data.json"
 
 function App() {
   return (
     <>
-      <Board></Board>
+      <Brick></Brick>
     </>
   )
 }
