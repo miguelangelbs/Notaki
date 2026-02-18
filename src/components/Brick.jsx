@@ -9,7 +9,7 @@ export const Brick = ({titulo = "Titulo Ejemplo"}) => {
                     {titulo}
                 </Text>
 
-                <IconButton variant="ghost" radius="full" size="1" aria-label={`Editar ${titulo}`}>
+                <IconButton variant="ghost" radius="full" aria-label={`Editar ${titulo}`}>
                     <GearIcon width={32} height={32}/>
                 </IconButton>
             </Flex>

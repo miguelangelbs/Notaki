@@ -1,11 +1,45 @@
-import { Board } from "./components/Board"
+import { Flex, Heading, IconButton, Theme } from "@radix-ui/themes"
 import { Brick } from "./components/Brick"
-import { Task } from "./components/Task"
+import { Tooltip } from "@radix-ui/themes"
+import { MoonIcon, PlusIcon, SunIcon, PersonIcon } from "@radix-ui/react-icons"
 
-function App() {
+function App({ theme, toggleTheme }) {
+
+
   return (
     <>
-      <Brick></Brick>
+        <Flex gap="2" as="div" justify="end">
+          <Tooltip content="Cambiar tema">
+            <IconButton variant="ghost" radius="full" onClick={toggleTheme}>
+              {
+                theme === "dark" ?
+                  <MoonIcon width={26} height={26} /> :
+                  <SunIcon width={26} height={26} />
+              }
+            </IconButton>
+          </Tooltip>
+
+          <Tooltip content="Ajustes de cuenta">
+            <IconButton variant="ghost" radius="full">
+              <PersonIcon width={26} height={26} />
+            </IconButton>
+          </Tooltip>
+        </Flex>
+
+        <Flex direction="column" gap="4" maxWidth="780px" mx="auto" p="4">
+          <Brick></Brick>
+          <Brick></Brick>
+          <Brick></Brick>
+          <Brick></Brick>
+
+          <Flex justify="center" mt="3">
+            <Tooltip content="Añadir nuevo tablero">
+              <IconButton radius="full" size="4">
+                <PlusIcon width={24} height={24} />
+              </IconButton>
+            </Tooltip>
+          </Flex>
+        </Flex>
     </>
   )
 }
