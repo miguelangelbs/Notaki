@@ -1,11 +1,10 @@
-import { Flex, Heading, IconButton, Theme } from "@radix-ui/themes"
-import { Brick } from "./components/Brick"
+import { Flex, IconButton } from "@radix-ui/themes"
 import { Tooltip } from "@radix-ui/themes"
 import { MoonIcon, PlusIcon, SunIcon, PersonIcon } from "@radix-ui/react-icons"
+import { Brick } from "../components/Brick"
 
-function App({ theme, toggleTheme }) {
 
-
+export const Home = ( {theme, toggleTheme} ) => {
   return (
     <>
         <Flex gap="2" as="div" justify="end">
@@ -31,6 +30,7 @@ function App({ theme, toggleTheme }) {
           <Brick></Brick>
           <Brick></Brick>
           <Brick></Brick>
+          <Brick></Brick>
 
           <Flex justify="center" mt="3">
             <Tooltip content="Añadir nuevo tablero">
@@ -44,4 +44,4 @@ function App({ theme, toggleTheme }) {
   )
 }
 
-export default App
+export default Home

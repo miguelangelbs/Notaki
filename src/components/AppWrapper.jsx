@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Theme } from '@radix-ui/themes'
-import App from '../App'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Home from '../routes/Home'
+import BoardDetail from '../routes/BoardDetail'
 
 
 export const AppWrapper = () => {
@@ -13,7 +15,12 @@ export const AppWrapper = () => {
 
   return (
     <Theme appearance={theme}>
-        <App theme={theme} toggleTheme={toggleTheme}/>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home theme={theme} toggleTheme={toggleTheme} />} />
+            <Route path="/board/:id" element={<BoardDetail theme={theme} toggleTheme={toggleTheme} />} />
+          </Routes>
+        </BrowserRouter>
     </Theme>
   )
 }
