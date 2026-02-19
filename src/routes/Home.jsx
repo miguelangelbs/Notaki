@@ -26,11 +26,11 @@ export const Home = ( {theme, toggleTheme} ) => {
         </Flex>
 
         <Flex direction="column" gap="4" maxWidth="780px" mx="auto" p="4">
-          <Brick></Brick>
-          <Brick></Brick>
-          <Brick></Brick>
-          <Brick></Brick>
-          <Brick></Brick>
+          <Brick id="1"></Brick>
+          <Brick id="2"></Brick>
+          <Brick id="3"></Brick>
+          <Brick id="4"></Brick>
+          <Brick id="5"></Brick>
 
           <Flex justify="center" mt="3">
             <Tooltip content="Añadir nuevo tablero">

@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from '../routes/Home'
 import BoardDetail from '../routes/BoardDetail'
 
-
 export const AppWrapper = () => {
 
     const [theme, setTheme] = useState("dark")
