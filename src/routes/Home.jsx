@@ -1,36 +1,18 @@
 import { Flex, IconButton } from "@radix-ui/themes"
 import { Tooltip } from "@radix-ui/themes"
-import { MoonIcon, PlusIcon, SunIcon, PersonIcon } from "@radix-ui/react-icons"
+import { PlusIcon } from "@radix-ui/react-icons"
 import { Brick } from "../components/Brick"
+import { Navbar } from "../components/Navbar"
 
 
 export const Home = ( {theme, toggleTheme} ) => {
   return (
     <>
-        <Flex gap="2" as="div" justify="end">
-          <Tooltip content="Cambiar tema">
-            <IconButton variant="ghost" radius="full" onClick={toggleTheme}>
-              {
-                theme === "dark" ?
-                  <MoonIcon width={26} height={26} /> :
-                  <SunIcon width={26} height={26} />
-              }
-            </IconButton>
-          </Tooltip>
 
-          <Tooltip content="Ajustes de cuenta">
-            <IconButton variant="ghost" radius="full">
-              <PersonIcon width={26} height={26} />
-            </IconButton>
-          </Tooltip>
-        </Flex>
+      <Navbar theme={theme} toggleTheme={toggleTheme}/>
 
         <Flex direction="column" gap="4" maxWidth="780px" mx="auto" p="4">
           <Brick id="1"></Brick>
-          <Brick id="2"></Brick>
-          <Brick id="3"></Brick>
-          <Brick id="4"></Brick>
-          <Brick id="5"></Brick>
 
           <Flex justify="center" mt="3">
             <Tooltip content="Añadir nuevo tablero">
