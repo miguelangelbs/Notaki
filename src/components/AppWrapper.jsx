@@ -3,13 +3,20 @@ import { Theme } from '@radix-ui/themes'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from '../routes/Home'
 import BoardDetail from '../routes/BoardDetail'
+import { actualizarPreferenciaTema, obtenerIdInvitado } from '../services/userService'
 
 export const AppWrapper = () => {
 
-    const [theme, setTheme] = useState("dark")
+    const [theme, setTheme] = useState(() => {
+        const idActual = obtenerIdInvitado();
+        const usuario = JSON.parse(localStorage.getItem(`usuario_${idActual}`));
+        return usuario?.theme ?? "dark";
+    });
 
     const toggleTheme = () => {
-        setTheme(theme === "dark" ? "light" : "dark")
+      const nuevoTema = theme === "dark" ? "light" : "dark";
+      setTheme(nuevoTema);
+      actualizarPreferenciaTema(nuevoTema);
     }
 
   return (

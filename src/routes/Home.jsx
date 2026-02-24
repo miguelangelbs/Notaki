@@ -6,6 +6,11 @@ import { Navbar } from "../components/Navbar"
 
 
 export const Home = ( {theme, toggleTheme} ) => {
+
+  const agregarBrick = () => {
+    console.log("Prueba")
+  }
+
   return (
     <>
 
@@ -16,7 +21,7 @@ export const Home = ( {theme, toggleTheme} ) => {
 
           <Flex justify="center" mt="3">
             <Tooltip content="Añadir nuevo tablero">
-              <IconButton radius="full" size="4">
+              <IconButton radius="full" size="4" onClick={agregarBrick}>
                 <PlusIcon width={24} height={24} />
               </IconButton>
             </Tooltip>

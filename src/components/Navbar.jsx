@@ -6,6 +6,10 @@ export const Navbar = ({ theme, toggleTheme, showBackButton = false }) => {
 
     const navigate = useNavigate()
 
+    const abrirAjustes = () => {
+        console.log("Ajustes usuario")
+    }
+
     return (
 
         <Flex gap="2" as="div" justify={showBackButton ? "between" : "end"} p="2">
@@ -29,7 +33,7 @@ export const Navbar = ({ theme, toggleTheme, showBackButton = false }) => {
                 </Tooltip>
 
                 <Tooltip content="Ajustes de cuenta">
-                    <IconButton variant="ghost" radius="full">
+                    <IconButton variant="ghost" radius="full" onClick={abrirAjustes}>
                         <PersonIcon width={26} height={26} />
                     </IconButton>
                 </Tooltip>
