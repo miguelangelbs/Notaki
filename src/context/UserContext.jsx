@@ -1,5 +1,5 @@
-import { createContext, useContext, useEffect, useState } from 'react'
-import { obtenerUsuarioInvitado, crearCuentaInvitado, obtenerIdInvitado, actualizarNombreInvitado, actualizarPreferenciaTema, resetCuentaInvitado } from '../services/userService'
+import { createContext, useContext, useState } from 'react'
+import { obtenerUsuarioInvitado, crearCuentaInvitado, actualizarNombreInvitado, actualizarPreferenciaTema, resetCuentaInvitado } from '../services/userService'
 
 const UserContext = createContext();
 
@@ -7,12 +7,12 @@ export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
 
-    useEffect(() => {
-        const idActual = obtenerIdInvitado();
-        if (!idActual) crearCuentaInvitado();
-    }, [])
+    const [usuario, setUsuario] = useState(() => {
+        const usuarioExistente = obtenerUsuarioInvitado();
+        if (usuarioExistente) return usuarioExistente;
+        return crearCuentaInvitado();
+    });
 
-    const [usuario, setUsuario] = useState(() => obtenerUsuarioInvitado());
     const [theme, setTheme] = useState(() => obtenerUsuarioInvitado()?.theme ?? "dark");
 
     const handleActualizarNombre = (nuevoNombre) => {
