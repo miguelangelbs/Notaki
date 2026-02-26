@@ -1,19 +1,30 @@
 import { v7 as uuidv7 } from "uuid"
 
-export const obtenerIdInvitado= () => {
-    return localStorage.getItem('invitadoActualId')
+/*Función que devuelve el ID de la cuenta invitado, 
+de no existir un id, se devuelve un null*/
+export const obtenerIdInvitado = () => {
+    const usuario = JSON.parse(localStorage.getItem('usuarioInvitado'));
+    return usuario?.id ?? null;
 }
 
+/*Función que devuelve la cuenta local de invitaod del localStorage*/
+export const obtenerUsuarioInvitado = () => {
+    return JSON.parse(localStorage.getItem('usuarioInvitado')) ?? null;
+}
+
+/*Función que se encarga de crear la cuenta de invitado con sus valores por defecto */
 export const crearCuentaInvitado = () => {
 
-    const idExistente = obtenerIdInvitado()
-    if (idExistente) return JSON.parse(localStorage.getItem(`usuario_${idExistente}`))
+    const idExistente = obtenerIdInvitado();
+    if (idExistente) return JSON.parse(localStorage.getItem('usuarioInvitado'));
 
     const fechaActual = new Date().toISOString()
 
     const cuentaInvitado = {
         id: uuidv7(),
         nombre: "Invitado",
+        email: null,
+        esInvitado: true,
         fechaCreacion: fechaActual,
         fechaModificacion: fechaActual,
         theme: "dark",
@@ -21,41 +32,37 @@ export const crearCuentaInvitado = () => {
     }
 
     try {
-        localStorage.setItem('invitadoActualId', cuentaInvitado.id)
-        localStorage.setItem(`usuario_${cuentaInvitado.id}`, JSON.stringify(cuentaInvitado))
+        localStorage.setItem('usuarioInvitado', JSON.stringify(cuentaInvitado));
     } catch (error) {
-        console.error('Error al guardar en localStorage', error)
+        console.error('Error al guardar en localStorage', error);
     }
 
     return cuentaInvitado
 }
 
+/*Función encargada de actualizar el nombre de la cuenta local */
 export const actualizarNombreInvitado = (nuevoNombre) => {
-    const idActual = obtenerIdInvitado()
-    const usuario = JSON.parse(localStorage.getItem(`usuario_${idActual}`))
-
-    if (!idActual || !usuario) return null
+    const usuario = obtenerUsuarioInvitado();
+    if (!usuario) return null;
 
     usuario.nombre = nuevoNombre
     usuario.fechaModificacion = new Date().toISOString()
 
-    localStorage.setItem(`usuario_${idActual}`, JSON.stringify(usuario))
+    localStorage.setItem('usuarioInvitado', JSON.stringify(usuario));
     return usuario
-
 }
 
+/*Función encargada de actualizar la preferencia del tema de la cuenta local */
 export const actualizarPreferenciaTema = (modoPreferido) => {
-    const idActual = obtenerIdInvitado()
-    const usuario = JSON.parse(localStorage.getItem(`usuario_${idActual}`))
-
-    if (!idActual || !usuario) return null
-
+    const usuario = obtenerUsuarioInvitado();
+    if (!usuario) return null;
+    
     usuario.theme = modoPreferido
-    localStorage.setItem(`usuario_${idActual}`, JSON.stringify(usuario))
+    localStorage.setItem('usuarioInvitado', JSON.stringify(usuario));
     return usuario
 }
 
-
+/*Función encargada de eliminar los datos de la cuenta local, limpiando el localStorage */
 export const resetCuentaInvitado = () => {
     localStorage.clear()
     return crearCuentaInvitado()
