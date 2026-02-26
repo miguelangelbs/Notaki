@@ -3,17 +3,16 @@ import { Column } from "../components/Column"
 import data from "../utils/data.json"
 import { Navbar } from "../components/Navbar"
 
-export const BoardDetail = ( {theme, toggleTheme} ) => {
+export const BoardDetail = () => {
   return (
     <>
-      <Navbar theme={theme} toggleTheme={toggleTheme} showBackButton={true}/>
+      <Navbar showBackButton={true} />
       <Flex direction="row" gap="4" p="4" justify="center" align="center">
-        <Column titulo={"Pendientes"} tareas={data}></Column>
-        <Column titulo={"En proceso"} tareas={data}></Column>
-        <Column titulo={"Completadas"} tareas={data}></Column>
+        <Column titulo={"Pendientes"} tareas={data} />
+        <Column titulo={"En proceso"} tareas={data} />
+        <Column titulo={"Completadas"} tareas={data} />
       </Flex>
     </>
-
   )
 }
 

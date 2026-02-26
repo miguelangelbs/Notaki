@@ -1,7 +1,9 @@
 import { Callout, Flex } from "@radix-ui/themes"
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons"
+import { useUser } from "../context/UserContext"
 
-export const AdvertenciaDatos = ({ usuario }) => {
+export const AdvertenciaDatos = () => {
+    const { usuario } = useUser()
     return usuario?.esInvitado && (
         <Flex justify="center">
             <Callout.Root color="red" role="alert" style={{ display: 'inline-flex' }}>
