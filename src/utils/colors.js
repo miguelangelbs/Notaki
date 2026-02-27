@@ -1,0 +1,15 @@
+export const COLORS = [
+    { nombre: "Rojo", valor: "red", hex: "#e5484d" },
+    { nombre: "Rosa", valor: "pink", hex: "#d6409f" },
+    { nombre: "Morado", valor: "purple", hex: "#8e4ec6" },
+    { nombre: "Violeta", valor: "violet", hex: "#6e56cf" },
+    { nombre: "Índigo", valor: "indigo", hex: "#3e63dd" },
+    { nombre: "Azul", valor: "blue", hex: "#0090ff" },
+    { nombre: "Cian", valor: "cyan", hex: "#00a2c7" },
+    { nombre: "Verde azulado", valor: "teal", hex: "#12a594" },
+    { nombre: "Verde", valor: "green", hex: "#30a46c" },
+    { nombre: "Lima", valor: "lime", hex: "#bdee63" },
+    { nombre: "Amarillo", valor: "yellow", hex: "#ffe629" },
+    { nombre: "Naranja", valor: "orange", hex: "#f76b15" },
+    { nombre: "Marrón", valor: "brown", valor: "brown", hex: "#ad7f58" },
+]

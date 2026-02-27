@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react'
-import { obtenerUsuarioInvitado, crearCuentaInvitado, actualizarNombreInvitado, actualizarPreferenciaTema, resetCuentaInvitado } from '../services/userService'
+import { obtenerUsuarioInvitado, crearCuentaInvitado, actualizarNombreInvitado, actualizarPreferenciaTema, resetCuentaInvitado, agregarTablero } from '../services/userService'
 
 const UserContext = createContext();
 
@@ -33,13 +33,19 @@ export const UserProvider = ({ children }) => {
         setTheme(nuevaCuenta.theme);
     }
 
+    const handleAgregarTablero = (titulo, color) => {
+        const usuarioActualizado = agregarTablero(titulo, color);
+        setUsuario(usuarioActualizado);
+    }
+
     return (
         <UserContext.Provider value={{ 
             usuario,
             theme,
             handleActualizarNombre,
             handleActualizarTema,
-            handleResetCuenta
+            handleResetCuenta,
+            handleAgregarTablero
         }}>
             {children}
         </UserContext.Provider>

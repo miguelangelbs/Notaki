@@ -67,3 +67,26 @@ export const resetCuentaInvitado = () => {
     localStorage.clear()
     return crearCuentaInvitado()
 }
+
+export const agregarTablero = (titulo, color) => {
+    const usuario = obtenerUsuarioInvitado();
+    if (!usuario) return null;
+
+    const fechaActual = new Date().toISOString()
+
+    const nuevoTablero = {
+        id: uuidv7(),
+        usuarioId: usuario.id,
+        titulo,
+        color,
+        posicion: usuario.tableros.length,
+        fechaCreacion: fechaActual,
+        fechaModificacion: fechaActual,
+        columnas: []
+    }
+
+    usuario.tableros.push(nuevoTablero);
+    usuario.fechaModificacion = fechaActual;
+    localStorage.setItem('usuarioInvitado', JSON.stringify(usuario));
+    return usuario;
+}

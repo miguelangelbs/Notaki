@@ -1,28 +1,29 @@
-import { Flex, IconButton } from "@radix-ui/themes"
-import { Tooltip } from "@radix-ui/themes"
-import { PlusIcon } from "@radix-ui/react-icons"
+import { Flex } from "@radix-ui/themes"
 import { Brick } from "../components/Brick"
 import { Navbar } from "../components/Navbar"
 import { AdvertenciaDatos } from "../components/AdvertenciaDatos"
+import { AddBoardDialog } from "../components/AddBoardDialog"
+import { useUser } from "../context/UserContext"
 
 export const Home = () => {
 
-  const agregarBrick = () => {
-    console.log("Prueba")
-  }
+  const { usuario } = useUser()
 
   return (
     <>
       <Navbar />
       <AdvertenciaDatos />
       <Flex direction="column" gap="4" maxWidth="780px" mx="auto" p="4">
-        <Brick id="1" />
+        {usuario.tableros.map((tablero) => (
+          <Brick
+            key={tablero.id}
+            id={tablero.id}
+            titulo={tablero.titulo}
+            color={tablero.color}
+          />
+        ))}
         <Flex justify="center" mt="3">
-          <Tooltip content="Añadir nuevo tablero">
-            <IconButton radius="full" size="4" onClick={agregarBrick}>
-              <PlusIcon width={24} height={24} />
-            </IconButton>
-          </Tooltip>
+          <AddBoardDialog />
         </Flex>
       </Flex>
     </>
