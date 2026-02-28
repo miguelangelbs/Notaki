@@ -90,3 +90,19 @@ export const agregarTablero = (titulo, color) => {
     localStorage.setItem('usuarioInvitado', JSON.stringify(usuario));
     return usuario;
 }
+
+/*Función encargada de reordenar la posición de los tableros en el localStorage, todo
+esto mediante el Drag&Drop */
+export const reordenarTableros = (tablerosReordenados) => {
+    const usuario = obtenerUsuarioInvitado();
+    if (!usuario) return null;
+
+    usuario.tableros = tablerosReordenados.map((tablero, index) => ({
+        ...tablero,
+        posicion: index
+    }))
+
+    usuario.fechaModificacion = new Date().toISOString();
+    localStorage.setItem('usuarioInvitado', JSON.stringify(usuario));
+    return usuario;
+}
