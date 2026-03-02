@@ -5,7 +5,7 @@ export const Column = ( {titulo, tareas} ) => {
     return (
     <Card>
         <Flex direction="column" gap="3">
-            <Text size="5" weight="bold">
+            <Text size="8" weight="bold" align="center">
                 {titulo}
             </Text>
             <Flex direction="column" gap="2">

@@ -1,0 +1,7 @@
+const eliminarTarea = () => {
+
+}
+
+const editarTarea = () => {
+    
+}

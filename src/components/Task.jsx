@@ -21,8 +21,7 @@ export const Task = ({ titulo="NombreEjemplo", descripcion="DescEjemlo", fecha="
           </DropdownMenu.Trigger>
 
           <DropdownMenu.Content>
-            <DropdownMenu.Item>Editar</DropdownMenu.Item>
-            <DropdownMenu.Item>Cambiar color</DropdownMenu.Item>
+            <DropdownMenu.Item>Editar tarea</DropdownMenu.Item>
             <DropdownMenu.Separator/>
             <DropdownMenu.Item color="red">
               Eliminar

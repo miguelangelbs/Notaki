@@ -32,6 +32,7 @@ export const Navbar = ({ showBackButton = false }) => {
                     <IconButton variant="ghost" radius="full" onClick={abrirAjustes}>
                         <PersonIcon width={26} height={26} />
                     </IconButton>
+
                 </Tooltip>
             </Flex>
         </Flex>
