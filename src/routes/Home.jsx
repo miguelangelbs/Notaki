@@ -1,4 +1,4 @@
-import { Flex } from "@radix-ui/themes"
+import { Flex, Text } from "@radix-ui/themes"
 import { Brick } from "../components/Brick"
 import { Navbar } from "../components/Navbar"
 import { AdvertenciaDatos } from "../components/AdvertenciaDatos"
@@ -8,6 +8,7 @@ import { DndContext, closestCenter } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import { restrictToVerticalAxis, restrictToWindowEdges } from "@dnd-kit/modifiers"
 import { useSortableTableros } from "../hooks/useSortableTableros"
+import { MAX_TABLEROS } from '../utils/constants'
 
 export const Home = () => {
 
@@ -36,9 +37,17 @@ export const Home = () => {
             ))}
           </SortableContext>
         </DndContext>
-        <Flex justify="center" mt="3">
-          <AddBoardDialog />
-        </Flex>
+
+        {usuario.tableros.length < MAX_TABLEROS ? (
+          <Flex justify="center" mt="3">
+            <AddBoardDialog />
+          </Flex>
+        ) : (
+          <Text align="center" size="2" color="gray">
+            Has alcanzado el límite de {MAX_TABLEROS} tableros
+          </Text>
+        )}
+
       </Flex>
     </>
   )
