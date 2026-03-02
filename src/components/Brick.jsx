@@ -10,15 +10,18 @@ import { useState } from "react"
 export const Brick = ({ id, titulo = "Titulo Ejemplo", color = "gray" }) => {
 
     const navigate = useNavigate()
-    const { attributes, listeners, setNodeRef, transform, isDragging } = useSortable({ id })
+    const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id })
 
     const [menuAbierto, setMenuAbierto] = useState(false)
 
     const style = {
-        transform: CSS.Translate.toString(transform),
-        transition: isDragging ? 'none' : 'transform 150ms ease',
-        opacity: isDragging ? 0.5 : 1,
+        transform: CSS.Transform.toString(transform),
+        transition,
+        opacity: isDragging ? 0.4 : 1,
+        scale: isDragging ? '1.02' : '1',
+        boxShadow: isDragging ? '0 8px 24px rgba(0,0,0,0.3)' : 'none',
         backgroundColor: `var(--${color}-9)`,
+        zIndex: isDragging ? 999 : 'auto',
     }
 
     return (
