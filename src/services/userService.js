@@ -68,6 +68,8 @@ export const resetCuentaInvitado = () => {
     return crearCuentaInvitado()
 }
 
+/*Función encargada de agregar un nuevo tablero en el localStorage,
+con un título y color correspondiente */
 export const agregarTablero = (titulo, color) => {
     const usuario = obtenerUsuarioInvitado();
     if (!usuario) return null;
@@ -102,6 +104,17 @@ export const reordenarTableros = (tablerosReordenados) => {
         posicion: index
     }))
 
+    usuario.fechaModificacion = new Date().toISOString();
+    localStorage.setItem('usuarioInvitado', JSON.stringify(usuario));
+    return usuario;
+}
+
+/*Función encargada de eliminar un tablero específico del localStorage */
+export const eliminarTablero = (tableroId) => {
+    const usuario = obtenerUsuarioInvitado();
+    if (!usuario) return null;
+
+    usuario.tableros = usuario.tableros.filter(t => t.id !== tableroId);
     usuario.fechaModificacion = new Date().toISOString();
     localStorage.setItem('usuarioInvitado', JSON.stringify(usuario));
     return usuario;
