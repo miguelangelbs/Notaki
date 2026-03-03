@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from 'react'
 import { obtenerUsuarioInvitado, crearCuentaInvitado, actualizarNombreInvitado, actualizarPreferenciaTema, resetCuentaInvitado } from '../services/userService'
 import { agregarTablero, editarTablero, eliminarTablero, reordenarTableros } from '../services/boardService';
+import { agregarColumna, editarColumna, eliminarColumna } from '../services/columnService';
 
 const UserContext = createContext();
 
@@ -54,6 +55,21 @@ export const UserProvider = ({ children }) => {
         setUsuario(usuarioActualizado);
     }
 
+    const handleEditarColumna = (tableroId, columnaId, nuevoTitulo, nuevoColor) => {
+        const usuarioActualizado = editarColumna(tableroId, columnaId, nuevoTitulo, nuevoColor);
+        setUsuario(usuarioActualizado);
+    }
+
+    const handleEliminarColumna = (tableroId, columnaId) => {
+        const usuarioActualizado = eliminarColumna(tableroId, columnaId);
+        setUsuario(usuarioActualizado);
+    }
+
+    const handleAgregarColumna = (tableroId, titulo, color) => {
+        const usuarioActualizado = agregarColumna(tableroId, titulo, color);
+        setUsuario(usuarioActualizado);
+    }
+
     return (
         <UserContext.Provider value={{
             usuario,
@@ -64,7 +80,10 @@ export const UserProvider = ({ children }) => {
             handleAgregarTablero,
             handleReordenarTableros,
             handleEliminarTablero,
-            handleEditarTablero
+            handleEditarTablero,
+            handleEditarColumna,
+            handleEliminarColumna,
+            handleAgregarColumna
         }}>
             {children}
         </UserContext.Provider>

@@ -3,21 +3,21 @@ import { PlusIcon } from "@radix-ui/react-icons"
 import { useUser } from "../context/UserContext"
 import { FormDialog } from "./FormDialog"
 
-export const AddBoardDialog = () => {
+export const AddColumnDialog = ({ tableroId }) => {
 
-    const { handleAgregarTablero } = useUser()
+    const { handleAgregarColumna } = useUser()
 
     return (
-        <Tooltip content="Añadir nuevo tablero">
+        <Tooltip content="Añadir nueva columna">
             <FormDialog
                 trigger={
                     <IconButton radius="full" size="4">
                         <PlusIcon width={24} height={24} />
                     </IconButton>
                 }
-                tituloDialog="Nuevo tablero"
-                textoConfirmar="Crear tablero"
-                onConfirmar={(titulo, color) => handleAgregarTablero(titulo, color)}
+                tituloDialog="Nueva columna"
+                textoConfirmar="Crear columna"
+                onConfirmar={(titulo, color) => handleAgregarColumna(tableroId, titulo, color)}
             />
         </Tooltip>
     )

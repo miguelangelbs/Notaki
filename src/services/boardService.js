@@ -8,16 +8,32 @@ export const agregarTablero = (titulo, color) => {
     if (!usuario) return null;
 
     const fechaActual = new Date().toISOString()
+    const tableroId = uuidv7()
+
+    const columnasDefault = [
+        { titulo: "Pendientes", posicion: 0 },
+        { titulo: "En Proceso", posicion: 1 },
+        { titulo: "Completadas", posicion: 2 }
+    ].map(columna => ({
+        id: uuidv7(),
+        tableroId,
+        titulo: columna.titulo,
+        posicion: columna.posicion,
+        color: color,
+        fechaCreacion: fechaActual,
+        fechaModificacion: fechaActual,
+        tareas: []
+    }))
 
     const nuevoTablero = {
-        id: uuidv7(),
+        id: tableroId,
         usuarioId: usuario.id,
         titulo,
         color,
         posicion: usuario.tableros.length,
         fechaCreacion: fechaActual,
         fechaModificacion: fechaActual,
-        columnas: []
+        columnas: columnasDefault
     }
 
     usuario.tableros.push(nuevoTablero);

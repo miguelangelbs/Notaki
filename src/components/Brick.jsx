@@ -1,5 +1,5 @@
 import { Card, DropdownMenu, Flex, IconButton, Text } from "@radix-ui/themes"
-import { GearIcon, DragHandleDots2Icon } from "@radix-ui/react-icons"
+import { GearIcon, DragHandleDots2Icon, DragHandleDots1Icon, DragHandleHorizontalIcon } from "@radix-ui/react-icons"
 import { useNavigate } from "react-router-dom"
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
@@ -44,7 +44,7 @@ export const Brick = ({ id, titulo = "Titulo Ejemplo", color = "gray" }) => {
                         onClick={(e) => e.stopPropagation()}
                         className={isDragging ? 'handle-dragging' : 'handle'}
                     >
-                        <DragHandleDots2Icon width={32} height={32} />
+                        <DragHandleHorizontalIcon width={32} height={32} />
                     </IconButton>
 
                     <DropdownMenu.Root open={menuAbierto} onOpenChange={setMenuAbierto}>

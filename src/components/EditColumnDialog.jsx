@@ -2,24 +2,24 @@ import { AlertDialog, Button, DropdownMenu, Flex } from "@radix-ui/themes"
 import { useUser } from "../context/UserContext"
 import { FormDialog } from "./FormDialog"
 
-export const EditBoardDialog = ({ id, titulo, color, onClose }) => {
+export const EditColumnDialog = ({ tableroId, id, titulo, color, onClose }) => {
 
-    const { handleEliminarTablero, handleEditarTablero } = useUser()
+    const { handleEliminarColumna, handleEditarColumna } = useUser()
 
     return (
         <>
             <FormDialog
                 trigger={
                     <DropdownMenu.Item onSelect={(e) => e.preventDefault()}>
-                        Editar tablero
+                        Editar columna
                     </DropdownMenu.Item>
                 }
                 titulo={titulo}
                 color={color}
-                tituloDialog="Editar tablero"
+                tituloDialog="Editar columna"
                 textoConfirmar="Guardar cambios"
-                onConfirmar={(nuevoTitulo, nuevoColor) => { 
-                    handleEditarTablero(id, nuevoTitulo, nuevoColor)
+                onConfirmar={(nuevoTitulo, nuevoColor) => {
+                    handleEditarColumna(tableroId, id, nuevoTitulo, nuevoColor)
                     onClose()
                 }}
             />
@@ -31,16 +31,16 @@ export const EditBoardDialog = ({ id, titulo, color, onClose }) => {
                     </DropdownMenu.Item>
                 </AlertDialog.Trigger>
                 <AlertDialog.Content size="3">
-                    <AlertDialog.Title align="center">Eliminar tablero</AlertDialog.Title>
+                    <AlertDialog.Title align="center">Eliminar columna</AlertDialog.Title>
                     <AlertDialog.Description align="center">
-                        ¿Estás seguro de que quieres eliminar el tablero "{titulo}"? {<br />} Esta acción no se puede deshacer.
+                        ¿Estás seguro de que quieres eliminar la columna "{titulo}"? {<br />} Esta acción no se puede deshacer.
                     </AlertDialog.Description>
                     <Flex gap="3" mt="4" justify="center">
                         <AlertDialog.Cancel>
                             <Button variant="soft" color="gray">Cancelar</Button>
                         </AlertDialog.Cancel>
                         <AlertDialog.Action>
-                            <Button color="red" onClick={() => handleEliminarTablero(id)}>Eliminar</Button>
+                            <Button color="red" onClick={() => handleEliminarColumna(tableroId, id)}>Eliminar</Button>
                         </AlertDialog.Action>
                     </Flex>
                 </AlertDialog.Content>

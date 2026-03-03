@@ -1,9 +1,9 @@
 import { useState } from "react"
-import { Button, Dialog, Flex, Text, TextField } from "@radix-ui/themes"
+import { Button, Dialog, Em, Flex, Text, TextField } from "@radix-ui/themes"
 import { COLORS } from "../utils/colors"
 import { ColorPicker } from "./ColorPicker"
 
-export const BoardFormDialog = ({
+export const FormDialog = ({
     trigger,
     titulo = "",
     color = COLORS[0].valor,
@@ -36,10 +36,14 @@ export const BoardFormDialog = ({
                 <Dialog.Title>{tituloDialog}</Dialog.Title>
                 <Flex direction="column" gap="3">
                     <label>
+                        <Text size="2" color="gray" >
+                            <Em>El nombre puede ser de 10 carácteres como máximo</Em>
+                        </Text>
                         <TextField.Root
                             placeholder="Escribe un nombre para el tablero..."
                             value={tituloTablero}
                             onChange={(e) => setTituloTablero(e.target.value)}
+                            maxLength={11}
                         />
                     </label>
                     <label>
