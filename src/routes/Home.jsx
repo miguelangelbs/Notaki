@@ -1,4 +1,4 @@
-import { Flex, Text } from "@radix-ui/themes"
+import { Callout, Flex, Text } from "@radix-ui/themes"
 import { Brick } from "../components/Brick"
 import { Navbar } from "../components/Navbar"
 import { AdvertenciaDatos } from "../components/AdvertenciaDatos"
@@ -9,6 +9,7 @@ import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import { restrictToVerticalAxis, restrictToWindowEdges } from "@dnd-kit/modifiers"
 import { useSortableTableros } from "../hooks/useSortableTableros"
 import { MAX_TABLEROS } from '../utils/constants'
+import { InfoCircledIcon } from "@radix-ui/react-icons"
 
 export const Home = () => {
 
@@ -43,11 +44,17 @@ export const Home = () => {
             <AddBoardDialog />
           </Flex>
         ) : (
-          <Text align="center" size="2" color="gray">
-            Has alcanzado el límite de {MAX_TABLEROS} tableros
-          </Text>
+          <Flex justify="center" mt="3">
+            <Callout.Root color="gray">
+              <Callout.Icon>
+                <InfoCircledIcon />
+              </Callout.Icon>
+              <Callout.Text>
+                Has alcanzado el límite de {MAX_TABLEROS} tableros
+              </Callout.Text>
+            </Callout.Root>
+          </Flex>
         )}
-
       </Flex>
     </>
   )
