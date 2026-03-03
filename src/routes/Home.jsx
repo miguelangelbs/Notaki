@@ -1,4 +1,4 @@
-import { Callout, Flex, Text } from "@radix-ui/themes"
+import { Callout, Flex, Text, Tooltip } from "@radix-ui/themes"
 import { Brick } from "../components/Brick"
 import { Navbar } from "../components/Navbar"
 import { AdvertenciaDatos } from "../components/AdvertenciaDatos"
@@ -6,7 +6,7 @@ import { AddBoardDialog } from "../components/AddBoardDialog"
 import { useUser } from "../context/UserContext"
 import { DndContext, closestCenter } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
-import { restrictToVerticalAxis, restrictToWindowEdges } from "@dnd-kit/modifiers"
+import { restrictToVerticalAxis, restrictToWindowEdges, restrictToParentElement } from "@dnd-kit/modifiers"
 import { useSortableTableros } from "../hooks/useSortableTableros"
 import { MAX_TABLEROS } from '../utils/constants'
 import { InfoCircledIcon } from "@radix-ui/react-icons"
@@ -25,7 +25,7 @@ export const Home = () => {
           collisionDetection={closestCenter}
           onDragEnd={handleDragEnd}
           sensors={sensors}
-          modifiers={[restrictToVerticalAxis, restrictToWindowEdges]}
+          modifiers={[restrictToVerticalAxis, restrictToParentElement]}
         >
           <SortableContext items={usuario.tableros.map(t => t.id)} strategy={verticalListSortingStrategy}>
             {usuario.tableros.map((tablero) => (
@@ -41,7 +41,7 @@ export const Home = () => {
 
         {usuario.tableros.length < MAX_TABLEROS ? (
           <Flex justify="center" mt="3">
-            <AddBoardDialog />
+              <AddBoardDialog />
           </Flex>
         ) : (
           <Flex justify="center" mt="3">

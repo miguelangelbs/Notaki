@@ -8,17 +8,17 @@ export const AddBoardDialog = () => {
     const { handleAgregarTablero } = useUser()
 
     return (
-        <Tooltip content="Añadir nuevo tablero">
-            <FormDialog
-                trigger={
+        <FormDialog
+            trigger={
+                <Tooltip content="Añadir nuevo tablero">
                     <IconButton radius="full" size="4">
                         <PlusIcon width={24} height={24} />
                     </IconButton>
-                }
-                tituloDialog="Nuevo tablero"
-                textoConfirmar="Crear tablero"
-                onConfirmar={(titulo, color) => handleAgregarTablero(titulo, color)}
-            />
-        </Tooltip>
+                </Tooltip>
+            }
+            tituloDialog="Nuevo tablero"
+            textoConfirmar="Crear tablero"
+            onConfirmar={(titulo, color) => handleAgregarTablero(titulo, color)}
+        />
     )
 }

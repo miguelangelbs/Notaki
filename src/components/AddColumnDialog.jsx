@@ -8,17 +8,17 @@ export const AddColumnDialog = ({ tableroId }) => {
     const { handleAgregarColumna } = useUser()
 
     return (
-        <Tooltip content="Añadir nueva columna">
-            <FormDialog
-                trigger={
+        <FormDialog
+            trigger={
+                <Tooltip content="Añadir nueva columna">
                     <IconButton radius="full" size="4">
                         <PlusIcon width={24} height={24} />
                     </IconButton>
-                }
-                tituloDialog="Nueva columna"
-                textoConfirmar="Crear columna"
-                onConfirmar={(titulo, color) => handleAgregarColumna(tableroId, titulo, color)}
-            />
-        </Tooltip>
+                </Tooltip>
+            }
+            tituloDialog="Nueva columna"
+            textoConfirmar="Crear columna"
+            onConfirmar={(titulo, color) => handleAgregarColumna(tableroId, titulo, color)}
+        />
     )
 }
