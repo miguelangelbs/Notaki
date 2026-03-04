@@ -1,4 +1,4 @@
-import { IconButton, Tooltip } from "@radix-ui/themes"
+import { IconButton } from "@radix-ui/themes"
 import { PlusIcon } from "@radix-ui/react-icons"
 import { useUser } from "../context/UserContext"
 import { FormDialog } from "./FormDialog"
@@ -10,11 +10,9 @@ export const AddBoardDialog = () => {
     return (
         <FormDialog
             trigger={
-                <Tooltip content="Añadir nuevo tablero">
-                    <IconButton radius="full" size="4">
-                        <PlusIcon width={24} height={24} />
-                    </IconButton>
-                </Tooltip>
+                <IconButton radius="full" size="4">
+                    <PlusIcon width={24} height={24} />
+                </IconButton>
             }
             tituloDialog="Nuevo tablero"
             textoConfirmar="Crear tablero"

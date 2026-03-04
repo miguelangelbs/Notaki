@@ -29,7 +29,7 @@ export const FormDialog = ({
 
     return (
         <Dialog.Root onOpenChange={handleOpenChange}>
-            <Dialog.Trigger asChild>
+            <Dialog.Trigger>
                 {trigger}
             </Dialog.Trigger>
             <Dialog.Content>

@@ -1,4 +1,4 @@
-import { IconButton, Tooltip } from "@radix-ui/themes"
+import { IconButton } from "@radix-ui/themes"
 import { PlusIcon } from "@radix-ui/react-icons"
 import { useUser } from "../context/UserContext"
 import { FormDialog } from "./FormDialog"
@@ -10,11 +10,9 @@ export const AddColumnDialog = ({ tableroId }) => {
     return (
         <FormDialog
             trigger={
-                <Tooltip content="Añadir nueva columna">
-                    <IconButton radius="full" size="4">
-                        <PlusIcon width={24} height={24} />
-                    </IconButton>
-                </Tooltip>
+                <IconButton radius="full" size="4">
+                    <PlusIcon width={24} height={24} />
+                </IconButton>
             }
             tituloDialog="Nueva columna"
             textoConfirmar="Crear columna"
