@@ -63,3 +63,22 @@ export const editarColumna = (tableroId, columnaId, nuevoTitulo, nuevoColor) => 
     return usuario;
 
 }
+
+/*Función encargada de reordenar la posición de las columnas de un tablero en especifico, todo
+esto mediante el Drag&Drop */
+export const reordenarColumnas = (tableroId, columnasReordenadas) => {
+    const usuario = obtenerUsuarioInvitado();
+    if (!usuario) return null;
+
+    const tablero = usuario.tableros.find(t => t.id === tableroId);
+    if (!tablero) return null;
+
+    tablero.columnas = columnasReordenadas.map((columna, index) => ({
+        ...columna,
+        posicion: index
+    }))
+
+    usuario.fechaModificacion = new Date().toISOString();
+    localStorage.setItem('usuarioInvitado', JSON.stringify(usuario));
+    return usuario;
+}
