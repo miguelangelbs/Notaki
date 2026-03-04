@@ -1,5 +1,5 @@
 import { Card, DropdownMenu, Flex, IconButton, Text } from "@radix-ui/themes"
-import { GearIcon, DragHandleDots2Icon, DragHandleDots1Icon, DragHandleHorizontalIcon } from "@radix-ui/react-icons"
+import { GearIcon, DragHandleDots2Icon } from "@radix-ui/react-icons"
 import { useNavigate } from "react-router-dom"
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
@@ -19,7 +19,6 @@ export const Brick = ({ id, titulo = "Titulo Ejemplo", color = "gray" }) => {
         transition,
         opacity: isDragging ? 0.4 : 1,
         scale: isDragging ? '1.02' : '1',
-        boxShadow: isDragging ? '0 8px 24px rgba(0,0,0,0.3)' : 'none',
         backgroundColor: `var(--${color}-9)`,
         zIndex: isDragging ? 999 : 'auto',
     }
@@ -44,7 +43,7 @@ export const Brick = ({ id, titulo = "Titulo Ejemplo", color = "gray" }) => {
                         onClick={(e) => e.stopPropagation()}
                         className={isDragging ? 'handle-dragging' : 'handle'}
                     >
-                        <DragHandleHorizontalIcon width={32} height={32} />
+                        <DragHandleDots2Icon width={32} height={32} />
                     </IconButton>
 
                     <DropdownMenu.Root open={menuAbierto} onOpenChange={setMenuAbierto}>

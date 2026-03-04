@@ -1,7 +1,7 @@
 import { Card, DropdownMenu, Flex, IconButton, Text } from "@radix-ui/themes"
 import { Task } from "./Task"
 import { useState } from "react"
-import { DotsVerticalIcon, GearIcon } from "@radix-ui/react-icons"
+import { DotsVerticalIcon, DragHandleDots2Icon } from "@radix-ui/react-icons"
 import { EditColumnDialog } from "./EditColumnDialog"
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
@@ -22,17 +22,29 @@ export const Column = ({ id, tableroId, titulo, color, tareas = [] }) => {
     return (
         <Card 
             ref={setNodeRef}
+            {...attributes}
             style={{ 
-            ...style,
-            minHeight: 'calc(100vh - 160px)',
-            width: 'max-content', 
-            position: 'relative',
-            maxWidth: '500px',
-            minWidth: '300px',
-            backgroundColor: `var(--${color}-9)`
-            }}>
+                ...style,
+                minHeight: 'calc(100vh - 160px)',
+                width: 'max-content', 
+                position: 'relative',
+                maxWidth: '500px',
+                minWidth: '300px',
+                backgroundColor: `var(--${color}-9)`
+            }}
+        >
             <Flex direction="column" gap="3">
                 <Flex justify="center" align="center" style={{ position: 'relative' }}>
+                    <DragHandleDots2Icon
+                        width={20}
+                        height={20}
+                        style={{
+                            position: 'absolute',
+                            left: 0,
+                            opacity: 0.4,
+                            pointerEvents: 'none'
+                        }}
+                    />
                     <Text 
                         size="8" 
                         weight="bold" 
@@ -41,8 +53,12 @@ export const Column = ({ id, tableroId, titulo, color, tareas = [] }) => {
                         style={{ 
                             paddingRight: '40px', 
                             paddingLeft: '40px',
-                            underSelect: 'none',
-                            cursor: isDragging ? 'grabbing' : 'grab' }}>
+                            userSelect: 'none',
+                            WebkitUserSelect: 'none',
+                            touchAction: 'none',
+                            cursor: isDragging ? 'grabbing' : 'grab'
+                        }}
+                    >
                         {titulo}
                     </Text>
                     <DropdownMenu.Root open={menuAbierto} onOpenChange={setMenuAbierto}>
