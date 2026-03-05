@@ -10,7 +10,7 @@ export const AddColumnDialog = ({ tableroId }) => {
     return (
         <FormDialog
             trigger={
-                <IconButton radius="full" size="4">
+                <IconButton radius="full" size="4" variant="soft">
                     <PlusIcon width={24} height={24} />
                 </IconButton>
             }

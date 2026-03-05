@@ -10,8 +10,8 @@ export const AddBoardDialog = () => {
     return (
         <FormDialog
             trigger={
-                <IconButton radius="full" size="4">
-                    <PlusIcon width={24} height={24} />
+                <IconButton radius="full" size="4" variant="soft">
+                    <PlusIcon width={32} height={32} />
                 </IconButton>
             }
             tituloDialog="Nuevo tablero"

@@ -2,6 +2,7 @@ import { createContext, useContext, useState } from 'react'
 import { obtenerUsuarioInvitado, crearCuentaInvitado, actualizarNombreInvitado, actualizarPreferenciaTema, resetCuentaInvitado } from '../services/userService'
 import { agregarTablero, editarTablero, eliminarTablero, reordenarTableros } from '../services/boardService';
 import { agregarColumna, editarColumna, eliminarColumna, reordenarColumnas } from '../services/columnService';
+import { agregarTarea, editarTarea, eliminarTarea, reordenarTareas } from '../services/taskService';
 
 const UserContext = createContext();
 
@@ -75,6 +76,26 @@ export const UserProvider = ({ children }) => {
         setUsuario(usuarioActualizado);
     }
 
+    const handleAgregarTarea = (tableroId, columnaId, titulo, descripcion, fechaLimite, color) => {
+        const usuarioActualizado = agregarTarea(tableroId, columnaId, titulo, descripcion, fechaLimite, color);
+        setUsuario(usuarioActualizado);
+    }
+
+    const handleEditarTarea = (tableroId, columnaId, tareaId, nuevoTitulo, nuevaDescripcion, nuevaFechaLimite, nuevoColor) => {
+        const usuarioActualizado = editarTarea(tableroId, columnaId, tareaId, nuevoTitulo, nuevaDescripcion, nuevaFechaLimite, nuevoColor);
+        setUsuario(usuarioActualizado);
+    }
+
+    const handleEliminarTarea = (tableroId, columnaId, tareaId) => {
+        const usuarioActualizado = eliminarTarea(tableroId, columnaId, tareaId);
+        setUsuario(usuarioActualizado);
+    }
+
+    const handleReordenarTareas = (tableroId, columnaId, tareasReordenadas) => {
+        const usuarioActualizado = reordenarTareas(tableroId, columnaId, tareasReordenadas);
+        setUsuario(usuarioActualizado);
+    }
+
     return (
         <UserContext.Provider value={{
             usuario,
@@ -89,7 +110,11 @@ export const UserProvider = ({ children }) => {
             handleEditarColumna,
             handleEliminarColumna,
             handleAgregarColumna,
-            handleReordenarColumnas
+            handleReordenarColumnas,
+            handleAgregarTarea,
+            handleEditarTarea,
+            handleEliminarTarea,
+            handleReordenarTareas
         }}>
             {children}
         </UserContext.Provider>

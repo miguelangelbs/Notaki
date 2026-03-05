@@ -5,6 +5,7 @@ import { DotsVerticalIcon, DragHandleDots2Icon } from "@radix-ui/react-icons"
 import { EditColumnDialog } from "./EditColumnDialog"
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
+import { AddTaskDialog } from "./AddTaskDialog"
 
 export const Column = ({ id, tableroId, titulo, color, tareas = [] }) => {
 
@@ -20,13 +21,13 @@ export const Column = ({ id, tableroId, titulo, color, tareas = [] }) => {
     }
 
     return (
-        <Card 
+        <Card
             ref={setNodeRef}
             {...attributes}
-            style={{ 
+            style={{
                 ...style,
                 minHeight: 'calc(100vh - 160px)',
-                width: 'max-content', 
+                width: 'max-content',
                 position: 'relative',
                 maxWidth: '500px',
                 minWidth: '300px',
@@ -45,13 +46,13 @@ export const Column = ({ id, tableroId, titulo, color, tareas = [] }) => {
                             pointerEvents: 'none'
                         }}
                     />
-                    <Text 
-                        size="8" 
-                        weight="bold" 
-                        align="center" 
+                    <Text
+                        size="8"
+                        weight="bold"
+                        align="center"
                         {...listeners}
-                        style={{ 
-                            paddingRight: '40px', 
+                        style={{
+                            paddingRight: '40px',
                             paddingLeft: '40px',
                             userSelect: 'none',
                             WebkitUserSelect: 'none',
@@ -85,8 +86,20 @@ export const Column = ({ id, tableroId, titulo, color, tareas = [] }) => {
                 </Flex>
                 <Flex direction="column" gap="2">
                     {tareas.map((tarea) =>
-                        <Task key={tarea.id} {...tarea} />
+                        <Task
+                            key={tarea.id}
+                            id={tarea.id}
+                            tableroId={tableroId}
+                            columnaId={id}
+                            titulo={tarea.titulo}
+                            descripcion={tarea.descripcion}
+                            fechaLimite={tarea.fechaLimite}
+                            color={tarea.color}
+                        />
                     )}
+                    <Flex justify="center" mt="2">
+                        <AddTaskDialog tableroId={tableroId} columnaId={id} />
+                    </Flex>
                 </Flex>
             </Flex>
         </Card>
