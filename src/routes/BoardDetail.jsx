@@ -8,9 +8,9 @@ import { MAX_COLUMNAS } from "../utils/constants"
 import { AddColumnDialog } from "../components/AddColumnDialog"
 import { useSortableColumnas } from "../hooks/useSortableroColumnas"
 import { useSortableTareas } from "../hooks/useSortableTareas"
-import { DndContext, closestCenter } from '@dnd-kit/core'
+import { DndContext, closestCenter, DragOverlay } from '@dnd-kit/core'
 import { SortableContext, horizontalListSortingStrategy } from "@dnd-kit/sortable"
-
+import { Task } from "../components/Task"
 
 export const BoardDetail = () => {
 
@@ -21,6 +21,7 @@ export const BoardDetail = () => {
   const tablero = usuario.tableros.find(t => t.id === id)
 
   const [columnasLocales, setColumnasLocales] = useState(tablero?.columnas ?? [])
+  const [activoTarea, setActivoTarea] = useState(null)
 
   useEffect(() => {
     if (tablero) setColumnasLocales(tablero.columnas)
@@ -35,7 +36,22 @@ export const BoardDetail = () => {
 
   if (!tablero) return null
 
+  const handleDragStart = (event) => {
+    const { active } = event
+    const esColumna = columnasLocales.some(c => c.id === active.id)
+    if (!esColumna) {
+      for (const columna of columnasLocales) {
+        const tarea = columna.tareas.find(t => t.id === active.id)
+        if (tarea) {
+          setActivoTarea(tarea)
+          break
+        }
+      }
+    }
+  }
+
   const handleDragEnd = (event) => {
+    setActivoTarea(null)
     const { active } = event
     const esColumna = columnasLocales.some(c => c.id === active.id)
     if (esColumna) {
@@ -52,6 +68,7 @@ export const BoardDetail = () => {
         <Heading size="9" align="center" mb="4">{tablero.titulo}</Heading>
         <DndContext
           collisionDetection={closestCenter}
+          onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
           sensors={sensors}
         >
@@ -77,6 +94,17 @@ export const BoardDetail = () => {
               )}
             </Flex>
           </SortableContext>
+          <DragOverlay>
+            {activoTarea && (
+              <Task
+                id={activoTarea.id}
+                titulo={activoTarea.titulo}
+                descripcion={activoTarea.descripcion}
+                fechaLimite={activoTarea.fechaLimite}
+                color={activoTarea.color}
+              />
+            )}
+          </DragOverlay>
         </DndContext>
       </Flex>
     </>
