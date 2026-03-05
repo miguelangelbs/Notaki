@@ -1,24 +1,58 @@
 import { AlertDialog, Button, Card, DropdownMenu, Flex, IconButton, Text } from "@radix-ui/themes"
 import { DotsVerticalIcon } from "@radix-ui/react-icons"
 import { useUser } from "../context/UserContext"
+import { EditTaskDialog } from "./EditTaskDialog"
+import { useState } from "react"
+import { useSortable } from "@dnd-kit/sortable"
+import { CSS } from "@dnd-kit/utilities"
 
 export const Task = ({ id, tableroId, columnaId, titulo = "Nombre Ejemplo", descripcion = "Descripción", fechaLimite = null, color = "gray" }) => {
 
     const { handleEliminarTarea } = useUser()
+    const [menuAbierto, setMenuAbierto] = useState(false)
+
+    const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id })
+
+    const style = {
+        transform: CSS.Transform.toString(transform),
+        transition,
+        opacity: isDragging ? 0.4 : 1,
+        zIndex: isDragging ? 999 : 'auto',
+    }
 
     return (
-        <Card style={{ position: "relative", backgroundColor: `var(--${color}-9)` }}>
-            <DropdownMenu.Root>
+        <Card
+            ref={setNodeRef}
+            {...attributes}
+            {...listeners}
+            style={{
+                ...style,
+                position: "relative",
+                backgroundColor: `var(--${color}-9)`,
+                cursor: isDragging ? 'grabbing' : 'grab'
+            }}
+        >
+            <DropdownMenu.Root open={menuAbierto} onOpenChange={setMenuAbierto}>
                 <DropdownMenu.Trigger asChild>
                     <IconButton size="2" variant="ghost" radius="full"
                         style={{ position: "absolute", top: 8, right: 8 }}
                         aria-label="Más opciones"
+                        onClick={(e) => e.stopPropagation()}
                     >
                         <DotsVerticalIcon />
                     </IconButton>
                 </DropdownMenu.Trigger>
-                <DropdownMenu.Content>
-                    <DropdownMenu.Item>Editar tarea</DropdownMenu.Item>
+                <DropdownMenu.Content onClick={(e) => e.stopPropagation()}>
+                    <EditTaskDialog
+                        id={id}
+                        tableroId={tableroId}
+                        columnaId={columnaId}
+                        titulo={titulo}
+                        descripcion={descripcion}
+                        fechaLimite={fechaLimite}
+                        color={color}
+                        onClose={() => setMenuAbierto(false)}
+                    />
                     <DropdownMenu.Separator />
                     <AlertDialog.Root>
                         <AlertDialog.Trigger asChild>

@@ -1,9 +1,8 @@
 import { arrayMove } from "@dnd-kit/sortable"
 import { PointerSensor, useSensor, useSensors } from '@dnd-kit/core'
-import { restrictToHorizontalAxis, restrictToParentElement } from "@dnd-kit/modifiers"
 import { useUser } from "../context/UserContext"
 
-export const useSortableColumnas = (tableroId, columnas) => {
+export const useSortableColumnas = (tableroId, columnas, setColumnasLocales) => {
 
     const { handleReordenarColumnas } = useUser()
 
@@ -23,7 +22,10 @@ export const useSortableColumnas = (tableroId, columnas) => {
         const oldIndex = columnas.findIndex(c => c.id === active.id)
         const newIndex = columnas.findIndex(c => c.id === over.id)
 
+        if (oldIndex === -1 || newIndex === -1) return
+
         const columnasReordenadas = arrayMove(columnas, oldIndex, newIndex)
+        setColumnasLocales(columnasReordenadas)
         handleReordenarColumnas(tableroId, columnasReordenadas)
     }
 

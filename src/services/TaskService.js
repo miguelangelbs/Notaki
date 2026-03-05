@@ -97,3 +97,31 @@ export const reordenarTareas = (tableroId, columnaId, tareasReordenadas) => {
     localStorage.setItem('usuarioInvitado', JSON.stringify(usuario));
     return usuario;
 }
+
+export const moverTarea = (tableroId, columnaOrigenId, columnaDestinoId, tareaId, nuevaPosicion) => {
+    const usuario = obtenerUsuarioInvitado();
+    if (!usuario) return null;
+
+    const tablero = usuario.tableros.find(t => t.id === tableroId);
+    if (!tablero) return null;
+
+    const columnaOrigen = tablero.columnas.find(c => c.id === columnaOrigenId);
+    const columnaDestino = tablero.columnas.find(c => c.id === columnaDestinoId);
+    if (!columnaOrigen || !columnaDestino) return null;
+
+    const tarea = columnaOrigen.tareas.find(t => t.id === tareaId);
+    if (!tarea) return null;
+
+    columnaOrigen.tareas = columnaOrigen.tareas.filter(t => t.id !== tareaId);
+
+    const tareaMovida = { ...tarea, columnaId: columnaDestinoId, fechaModificacion: new Date().toISOString() }
+
+    columnaDestino.tareas.splice(nuevaPosicion, 0, tareaMovida)
+
+    columnaDestino.tareas = columnaDestino.tareas.map((t, index) => ({ ...t, posicion: index }))
+    columnaOrigen.tareas = columnaOrigen.tareas.map((t, index) => ({ ...t, posicion: index }))
+
+    usuario.fechaModificacion = new Date().toISOString();
+    localStorage.setItem('usuarioInvitado', JSON.stringify(usuario));
+    return usuario;
+}

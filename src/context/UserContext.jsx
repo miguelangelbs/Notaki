@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from 'react'
 import { obtenerUsuarioInvitado, crearCuentaInvitado, actualizarNombreInvitado, actualizarPreferenciaTema, resetCuentaInvitado } from '../services/userService'
 import { agregarTablero, editarTablero, eliminarTablero, reordenarTableros } from '../services/boardService';
 import { agregarColumna, editarColumna, eliminarColumna, reordenarColumnas } from '../services/columnService';
-import { agregarTarea, editarTarea, eliminarTarea, reordenarTareas } from '../services/taskService';
+import { agregarTarea, editarTarea, eliminarTarea, moverTarea, reordenarTareas } from '../services/taskService';
 
 const UserContext = createContext();
 
@@ -96,6 +96,11 @@ export const UserProvider = ({ children }) => {
         setUsuario(usuarioActualizado);
     }
 
+    const handleMoverTarea = (tableroId, columnaOrigenId, columnaDestinoId, tareaId, nuevaPosicion) => {
+        const usuarioActualizado = moverTarea(tableroId, columnaOrigenId, columnaDestinoId, tareaId, nuevaPosicion);
+        setUsuario(usuarioActualizado);
+    }
+
     return (
         <UserContext.Provider value={{
             usuario,
@@ -114,7 +119,8 @@ export const UserProvider = ({ children }) => {
             handleAgregarTarea,
             handleEditarTarea,
             handleEliminarTarea,
-            handleReordenarTareas
+            handleReordenarTareas,
+            handleMoverTarea
         }}>
             {children}
         </UserContext.Provider>

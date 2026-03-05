@@ -3,9 +3,9 @@ import { Task } from "./Task"
 import { useState } from "react"
 import { DotsVerticalIcon, DragHandleDots2Icon } from "@radix-ui/react-icons"
 import { EditColumnDialog } from "./EditColumnDialog"
-import { useSortable } from "@dnd-kit/sortable"
-import { CSS } from "@dnd-kit/utilities"
 import { AddTaskDialog } from "./AddTaskDialog"
+import { useSortable, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
+import { CSS } from "@dnd-kit/utilities"
 
 export const Column = ({ id, tableroId, titulo, color, tareas = [] }) => {
 
@@ -84,22 +84,28 @@ export const Column = ({ id, tableroId, titulo, color, tareas = [] }) => {
                         </DropdownMenu.Content>
                     </DropdownMenu.Root>
                 </Flex>
-                <Flex direction="column" gap="2">
-                    {tareas.map((tarea) =>
-                        <Task
-                            key={tarea.id}
-                            id={tarea.id}
-                            tableroId={tableroId}
-                            columnaId={id}
-                            titulo={tarea.titulo}
-                            descripcion={tarea.descripcion}
-                            fechaLimite={tarea.fechaLimite}
-                            color={tarea.color}
-                        />
-                    )}
-                    <Flex justify="center" mt="2">
-                        <AddTaskDialog tableroId={tableroId} columnaId={id} />
+                <SortableContext
+                    id={id}
+                    items={tareas.map(t => t.id)}
+                    strategy={verticalListSortingStrategy}
+                >
+                    <Flex direction="column" gap="2">
+                        {tareas.map((tarea) =>
+                            <Task
+                                key={tarea.id}
+                                id={tarea.id}
+                                tableroId={tableroId}
+                                columnaId={id}
+                                titulo={tarea.titulo}
+                                descripcion={tarea.descripcion}
+                                fechaLimite={tarea.fechaLimite}
+                                color={tarea.color}
+                            />
+                        )}
                     </Flex>
+                </SortableContext>
+                <Flex justify="center" mt="2">
+                    <AddTaskDialog tableroId={tableroId} columnaId={id} />
                 </Flex>
             </Flex>
         </Card>
