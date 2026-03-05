@@ -18,7 +18,6 @@ export const Brick = ({ id, titulo = "Titulo Ejemplo", color = "gray" }) => {
         transform: CSS.Transform.toString(transform),
         transition,
         opacity: isDragging ? 0.4 : 1,
-        scale: isDragging ? '1.02' : '1',
         backgroundColor: `var(--${color}-9)`,
         zIndex: isDragging ? 999 : 'auto',
     }

@@ -22,6 +22,7 @@ export const BoardDetail = () => {
 
   const [columnasLocales, setColumnasLocales] = useState(tablero?.columnas ?? [])
   const [activoTarea, setActivoTarea] = useState(null)
+  const [activaColumna, setActivaColumna] = useState(null)
 
   useEffect(() => {
     if (tablero) setColumnasLocales(tablero.columnas)
@@ -39,7 +40,10 @@ export const BoardDetail = () => {
   const handleDragStart = (event) => {
     const { active } = event
     const esColumna = columnasLocales.some(c => c.id === active.id)
-    if (!esColumna) {
+    if (esColumna) {
+      const columna = columnasLocales.find(c => c.id === active.id)
+      setActivaColumna(columna)
+    } else {
       for (const columna of columnasLocales) {
         const tarea = columna.tareas.find(t => t.id === active.id)
         if (tarea) {
@@ -52,6 +56,7 @@ export const BoardDetail = () => {
 
   const handleDragEnd = (event) => {
     setActivoTarea(null)
+    setActivaColumna(null)
     const { active } = event
     const esColumna = columnasLocales.some(c => c.id === active.id)
     if (esColumna) {
@@ -95,6 +100,15 @@ export const BoardDetail = () => {
             </Flex>
           </SortableContext>
           <DragOverlay>
+            {activaColumna && (
+              <Column
+                id={activaColumna.id}
+                tableroId={tablero.id}
+                titulo={activaColumna.titulo}
+                color={activaColumna.color}
+                tareas={activaColumna.tareas}
+              />
+            )}
             {activoTarea && (
               <Task
                 id={activoTarea.id}
