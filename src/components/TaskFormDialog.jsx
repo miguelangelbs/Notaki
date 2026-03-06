@@ -71,6 +71,7 @@ export const TaskFormDialog = ({
                             id="fecha-tarea"
                             type="date"
                             value={fechaLimiteTarea}
+                            min={new Date().toISOString().split('T')[0]}
                             onChange={(e) => setFechaLimiteTarea(e.target.value)}
                         />
                     </label>

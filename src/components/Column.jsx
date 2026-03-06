@@ -6,6 +6,7 @@ import { EditColumnDialog } from "./EditColumnDialog"
 import { AddTaskDialog } from "./AddTaskDialog"
 import { useSortable, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
+import { MAX_TAREAS } from "../utils/constants"
 
 const TAREAS_VACIAS = []
 
@@ -107,7 +108,9 @@ export const Column = ({ id, tableroId, titulo, color, tareas = TAREAS_VACIAS })
                     </Flex>
                 </SortableContext>
                 <Flex justify="center" mt="2">
-                    <AddTaskDialog tableroId={tableroId} columnaId={id} />
+                    {tareas.length < MAX_TAREAS && (
+                        <AddTaskDialog tableroId={tableroId} columnaId={id} />
+                    )}
                 </Flex>
             </Flex>
         </Card>
