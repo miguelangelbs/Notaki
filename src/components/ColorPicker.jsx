@@ -7,6 +7,10 @@ export const ColorPicker = ({ colorSeleccionado, onColorSeleccionado }) => {
             {COLORS.map((color) => (
                 <div
                     key={color.valor}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`Color ${color.nombre}`}
+                    aria-pressed={colorSeleccionado === color.valor}
                     style={{
                         width: 28,
                         height: 28,
@@ -16,6 +20,7 @@ export const ColorPicker = ({ colorSeleccionado, onColorSeleccionado }) => {
                         cursor: 'pointer'
                     }}
                     onClick={() => onColorSeleccionado(color.valor)}
+                    onKeyDown={(e) => e.key === 'Enter' && onColorSeleccionado(color.valor)}
                 />
             ))}
         </Flex>

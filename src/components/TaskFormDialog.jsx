@@ -43,37 +43,41 @@ export const TaskFormDialog = ({
             <Dialog.Content>
                 <Dialog.Title>{tituloDialog}</Dialog.Title>
                 <Flex direction="column" gap="3">
-                    <label>
+                    <label htmlFor="titulo-tarea">
                         <Text as="div" size="2" mb="1" weight="bold">Título</Text>
                         <TextField.Root
+                            id="titulo-tarea"
                             placeholder="Escribe un título..."
                             value={tituloTarea}
                             onChange={(e) => setTituloTarea(e.target.value)}
                             maxLength={50}
                         />
                     </label>
-                    <label>
+                    <label htmlFor="descripcion-tarea">
                         <Text as="div" size="2" mb="1" weight="bold">Descripción</Text>
                         <TextArea
+                            id="descripcion-tarea"
                             placeholder="Escribe una descripción..."
                             value={descripcionTarea}
                             onChange={(e) => setDescripcionTarea(e.target.value)}
                             maxLength={200}
                         />
                     </label>
-                    <label>
+                    <label htmlFor="fecha-tarea">
                         <Text as="div" size="2" mb="1" weight="bold">
                             Fecha límite <Text color="gray">(opcional)</Text>
                         </Text>
                         <TextField.Root
+                            id="fecha-tarea"
                             type="date"
                             value={fechaLimiteTarea}
                             onChange={(e) => setFechaLimiteTarea(e.target.value)}
                         />
                     </label>
-                    <label>
+                    <label htmlFor="color-tarea">
                         <Text as="div" size="2" mb="1" weight="bold">Color</Text>
                         <ColorPicker
+                            id="color-tarea"
                             colorSeleccionado={colorSeleccionado}
                             onColorSeleccionado={setColorSeleccionado}
                         />

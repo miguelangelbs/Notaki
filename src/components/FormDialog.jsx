@@ -35,20 +35,22 @@ export const FormDialog = ({
             <Dialog.Content>
                 <Dialog.Title>{tituloDialog}</Dialog.Title>
                 <Flex direction="column" gap="3">
-                    <label>
-                        <Text size="2" color="gray" >
+                    <label htmlFor="titulo-tablero">
+                        <Text size="2" color="gray">
                             <Em>El nombre puede ser de 10 carácteres como máximo</Em>
                         </Text>
                         <TextField.Root
+                            id="titulo-tablero"
                             placeholder="Escribe un nombre para el tablero..."
                             value={tituloTablero}
                             onChange={(e) => setTituloTablero(e.target.value)}
                             maxLength={11}
                         />
                     </label>
-                    <label>
+                    <label htmlFor="color-tablero">
                         <Text as="div" size="2" mb="1" weight="bold">Color</Text>
                         <ColorPicker
+                            id="color-tablero"
                             colorSeleccionado={colorSeleccionado}
                             onColorSeleccionado={setColorSeleccionado}
                         />

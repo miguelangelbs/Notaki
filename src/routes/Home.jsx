@@ -12,7 +12,7 @@ import { MAX_TABLEROS } from '../utils/constants'
 import { InfoCircledIcon } from "@radix-ui/react-icons"
 import { useState } from "react"
 
-export const Home = () => {
+const Home = () => {
 
   const { usuario } = useUser()
   const { sensors, handleDragEnd: handleDragEndTableros } = useSortableTableros()

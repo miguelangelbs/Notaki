@@ -7,7 +7,9 @@ import { AddTaskDialog } from "./AddTaskDialog"
 import { useSortable, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
 
-export const Column = ({ id, tableroId, titulo, color, tareas = [] }) => {
+const TAREAS_VACIAS = []
+
+export const Column = ({ id, tableroId, titulo, color, tareas = TAREAS_VACIAS }) => {
 
     const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id })
 

@@ -12,7 +12,7 @@ import { DndContext, closestCenter, DragOverlay } from '@dnd-kit/core'
 import { SortableContext, horizontalListSortingStrategy } from "@dnd-kit/sortable"
 import { Task } from "../components/Task"
 
-export const BoardDetail = () => {
+const BoardDetail = () => {
 
   const { id } = useParams()
   const { usuario } = useUser()
@@ -24,16 +24,18 @@ export const BoardDetail = () => {
   const [activoTarea, setActivoTarea] = useState(null)
   const [activaColumna, setActivaColumna] = useState(null)
 
+  const { sensors, handleDragEnd: handleDragEndColumnas } = useSortableColumnas(tablero?.id, columnasLocales, setColumnasLocales)
+  const { handleDragEnd: handleDragEndTareas } = useSortableTareas(tablero?.id, columnasLocales, setColumnasLocales)
+
   useEffect(() => {
     if (tablero) setColumnasLocales(tablero.columnas)
   }, [tablero])
 
-  useEffect(() => {
-    if (!tablero) navigate('/')
-  }, [tablero, navigate])
+  if (!tablero) {
+    navigate('/')
+    return null
+  }
 
-  const { sensors, handleDragEnd: handleDragEndColumnas } = useSortableColumnas(tablero?.id, columnasLocales, setColumnasLocales)
-  const { handleDragEnd: handleDragEndTareas } = useSortableTareas(tablero?.id, columnasLocales, setColumnasLocales)
 
   if (!tablero) return null
 
