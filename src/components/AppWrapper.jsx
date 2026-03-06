@@ -8,7 +8,7 @@ import { Footer } from './Footer'
 const AppContent = () => {
   const { theme } = useUser();
   return (
-    <Theme appearance={theme}>
+    <Theme appearance={theme} accentColor={theme === 'dark' ? 'teal' : 'red'} grayColor='gray'>
       <BrowserRouter>
         <Flex direction="column" minHeight="100vh">
           <Box flexGrow="1">
