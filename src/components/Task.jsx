@@ -10,14 +10,22 @@ export const Task = ({ id, tableroId, columnaId, titulo = "Nombre Ejemplo", desc
 
     const { handleEliminarTarea } = useUser()
     const [menuAbierto, setMenuAbierto] = useState(false)
+    const [editandoActivo, setEditandoActivo] = useState(false)
 
-    const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id })
+    const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ 
+        id,
+        disabled: editandoActivo
+    })
 
     const style = {
         transform: CSS.Transform.toString(transform),
         transition,
         opacity: isDragging ? 0.4 : 1,
         zIndex: isDragging ? 999 : 'auto',
+    }
+
+    const handleEditandoChange = (abierto) => {
+        setEditandoActivo(abierto)
     }
 
     return (
@@ -52,6 +60,7 @@ export const Task = ({ id, tableroId, columnaId, titulo = "Nombre Ejemplo", desc
                         fechaLimite={fechaLimite}
                         color={color}
                         onClose={() => setMenuAbierto(false)}
+                        onEditandoChange={handleEditandoChange}
                     />
                     <DropdownMenu.Separator />
                     <AlertDialog.Root>

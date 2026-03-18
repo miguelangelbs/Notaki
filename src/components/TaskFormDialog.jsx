@@ -3,6 +3,8 @@ import { Button, Dialog, Flex, Text, TextField, TextArea } from "@radix-ui/theme
 import { COLORS } from "../utils/colors"
 import { ColorPicker } from "./ColorPicker"
 
+const MIN_DATE = new Date().toISOString().split('T')[0]
+
 export const TaskFormDialog = ({
     trigger,
     titulo = "",
@@ -11,7 +13,8 @@ export const TaskFormDialog = ({
     color = COLORS[0].valor,
     tituloDialog = "Nueva tarea",
     textoConfirmar = "Crear tarea",
-    onConfirmar
+    onConfirmar,
+    onEditandoChange
 }) => {
 
     const [tituloTarea, setTituloTarea] = useState(titulo)
@@ -20,6 +23,9 @@ export const TaskFormDialog = ({
     const [colorSeleccionado, setColorSeleccionado] = useState(color)
 
     const handleOpenChange = (abierto) => {
+        if (onEditandoChange) {
+            onEditandoChange(abierto)
+        }
         if (abierto) {
             setTituloTarea(titulo)
             setDescripcionTarea(descripcion)
@@ -71,7 +77,7 @@ export const TaskFormDialog = ({
                             id="fecha-tarea"
                             type="date"
                             value={fechaLimiteTarea}
-                            min={new Date().toISOString().split('T')[0]}
+                            min={MIN_DATE}
                             onChange={(e) => setFechaLimiteTarea(e.target.value)}
                         />
                     </label>

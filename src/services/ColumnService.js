@@ -52,13 +52,14 @@ export const editarColumna = (tableroId, columnaId, nuevoTitulo, nuevoColor) => 
     const tablero = usuario.tableros.find(t => t.id === tableroId);
     if (!tablero) return null;
 
+    const fechaModificacion = new Date().toISOString();
     tablero.columnas = tablero.columnas.map(columna =>
         columna.id === columnaId
-        ? {...columna, titulo: nuevoTitulo, color: nuevoColor, fechaModificacion: new Date().toISOString()}
+        ? {...columna, titulo: nuevoTitulo, color: nuevoColor, fechaModificacion}
         : columna
     )
 
-    usuario.fechaModificacion = new Date().toISOString();
+    usuario.fechaModificacion = fechaModificacion;
     localStorage.setItem('usuarioInvitado', JSON.stringify(usuario));
     return usuario;
 

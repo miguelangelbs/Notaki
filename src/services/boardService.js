@@ -74,13 +74,14 @@ export const editarTablero = (tableroId, nuevoTitulo, nuevoColor) => {
     const usuario = obtenerUsuarioInvitado();
     if (!usuario) return null;
 
+    const fechaModificacion = new Date().toISOString();
     usuario.tableros = usuario.tableros.map(tablero => 
         tablero.id === tableroId 
-            ? { ...tablero, titulo: nuevoTitulo, color: nuevoColor, fechaModificacion: new Date().toISOString() }
+            ? { ...tablero, titulo: nuevoTitulo, color: nuevoColor, fechaModificacion }
             : tablero
     )
 
-    usuario.fechaModificacion = new Date().toISOString();
+    usuario.fechaModificacion = fechaModificacion;
     localStorage.setItem('usuarioInvitado', JSON.stringify(usuario));
     return usuario;
 }

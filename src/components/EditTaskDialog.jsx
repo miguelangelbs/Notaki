@@ -2,7 +2,7 @@ import { AlertDialog, Button, DropdownMenu, Flex } from "@radix-ui/themes"
 import { useUser } from "../context/UserContext"
 import { TaskFormDialog } from "./TaskFormDialog"
 
-export const EditTaskDialog = ({ id, tableroId, columnaId, titulo, descripcion, fechaLimite, color, onClose }) => {
+export const EditTaskDialog = ({ id, tableroId, columnaId, titulo, descripcion, fechaLimite, color, onClose, onEditandoChange }) => {
 
     const { handleEditarTarea } = useUser()
 
@@ -24,6 +24,7 @@ export const EditTaskDialog = ({ id, tableroId, columnaId, titulo, descripcion, 
                     handleEditarTarea(tableroId, columnaId, id, nuevoTitulo, nuevaDescripcion, nuevaFechaLimite, nuevoColor)
                     onClose()
                 }}
+                onEditandoChange={onEditandoChange}
             />
         </>
     )

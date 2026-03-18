@@ -3,7 +3,7 @@ import { PlusIcon } from "@radix-ui/react-icons"
 import { useUser } from "../context/UserContext"
 import { TaskFormDialog } from "./TaskFormDialog"
 
-export const AddTaskDialog = ({ tableroId, columnaId }) => {
+export const AddTaskDialog = ({ tableroId, columnaId, onEditandoChange }) => {
 
     const { handleAgregarTarea } = useUser()
 
@@ -19,6 +19,7 @@ export const AddTaskDialog = ({ tableroId, columnaId }) => {
             onConfirmar={(titulo, descripcion, fechaLimite, color) => 
                 handleAgregarTarea(tableroId, columnaId, titulo, descripcion, fechaLimite, color)
             }
+            onEditandoChange={onEditandoChange}
         />
     )
 }

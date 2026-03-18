@@ -24,15 +24,11 @@ export const useSortableTareas = (tableroId, columnas, setColumnasLocales) => {
 
         let columnaDestinoId = null
 
-        if (columnas.some(c => c.id === over.id)) {
-            columnaDestinoId = over.id
-        } else {
-            for (const columna of columnas) {
-                if (columna.tareas.some(t => t.id === over.id)) {
-                    columnaDestinoId = columna.id
-                    break
-                }
-            }
+        const columnaConTarea = columnas.find(c => 
+            c.id === over.id ? (columnaDestinoId = over.id, true) : c.tareas.some(t => t.id === over.id)
+        )
+        if (!columnaDestinoId) {
+            columnaDestinoId = columnaConTarea?.id ?? null
         }
 
         if (!columnaDestinoId) return
