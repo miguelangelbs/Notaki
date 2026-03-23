@@ -5,6 +5,7 @@ import { EditTaskDialog } from "./EditTaskDialog"
 import { useState } from "react"
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
+import { formatearFecha } from "../utils/dateUtils"
 
 export const Task = ({ id, tableroId, columnaId, titulo = "Nombre Ejemplo", descripcion = "Descripción", fechaLimite = null, color = "gray" }) => {
 
@@ -89,7 +90,7 @@ export const Task = ({ id, tableroId, columnaId, titulo = "Nombre Ejemplo", desc
             <Text as="div" weight="bold" size="6" mb="3">{titulo}</Text>
             <Text as="div" mb="3">{descripcion}</Text>
             {fechaLimite && (
-                <Text as="div" size="2" color="gray">{fechaLimite}</Text>
+                <Text as="div" size="2" color="gray">{formatearFecha(fechaLimite)}</Text>
             )}
         </Card>
     )
