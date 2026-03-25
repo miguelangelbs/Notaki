@@ -1,4 +1,5 @@
-import { Flex, Heading } from "@radix-ui/themes"
+import { Flex, Heading, Callout } from "@radix-ui/themes"
+import { InfoCircledIcon } from "@radix-ui/react-icons"
 import { Column } from "../components/Column"
 import { Navbar } from "../components/Navbar"
 import { useNavigate, useParams } from "react-router-dom"
@@ -94,11 +95,23 @@ const BoardDetail = () => {
                   tareas={columna.tareas}
                 />
               ))}
-              {columnasLocales.length < MAX_COLUMNAS && (
+              {columnasLocales.length === 0 ? (
+                <Flex direction="column" gap="4" align="center">
+                  <Callout.Root color="gray">
+                    <Callout.Icon>
+                      <InfoCircledIcon />
+                    </Callout.Icon>
+                    <Callout.Text>
+                      Crea tu primera columna para empezar a organizar tus tareas
+                    </Callout.Text>
+                  </Callout.Root>
+                  <AddColumnDialog tableroId={tablero.id} />
+                </Flex>
+              ) : columnasLocales.length < MAX_COLUMNAS ? (
                 <Flex align="center" style={{ minHeight: 'calc(100vh - 160px)' }}>
                   <AddColumnDialog tableroId={tablero.id} />
                 </Flex>
-              )}
+              ) : null}
             </Flex>
           </SortableContext>
           <DragOverlay>

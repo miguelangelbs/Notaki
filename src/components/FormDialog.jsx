@@ -14,16 +14,23 @@ export const FormDialog = ({
 
     const [tituloTablero, setTituloTablero] = useState(titulo)
     const [colorSeleccionado, setColorSeleccionado] = useState(color)
+    const [error, setError] = useState("")
 
     const handleOpenChange = (abierto) => {
         if (abierto) {
             setTituloTablero(titulo)
             setColorSeleccionado(color)
+            setError("")
         }
     }
 
-    const handleConfirmar = () => {
-        if (!tituloTablero.trim()) return
+    const handleConfirmar = (e) => {
+        if (!tituloTablero.trim()) {
+            setError("El nombre es obligatorio")
+            e.preventDefault()
+            return
+        }
+        setError("")
         onConfirmar(tituloTablero, colorSeleccionado)
     }
 
@@ -43,9 +50,14 @@ export const FormDialog = ({
                             id="titulo-tablero"
                             placeholder="Escribe un nombre para el tablero..."
                             value={tituloTablero}
-                            onChange={(e) => setTituloTablero(e.target.value)}
+                            onChange={(e) => {
+                                setTituloTablero(e.target.value)
+                                setError("")
+                            }}
                             maxLength={11}
+                            style={error ? { borderColor: "red" } : {}}
                         />
+                        {error && <Text color="red" size="2">{error}</Text>}
                     </label>
                     <label htmlFor="color-tablero">
                         <Text as="div" size="2" mb="1" weight="bold">Color</Text>

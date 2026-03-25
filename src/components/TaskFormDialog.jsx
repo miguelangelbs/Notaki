@@ -21,6 +21,8 @@ export const TaskFormDialog = ({
     const [descripcionTarea, setDescripcionTarea] = useState(descripcion)
     const [fechaLimiteTarea, setFechaLimiteTarea] = useState(fechaLimite)
     const [colorSeleccionado, setColorSeleccionado] = useState(color)
+    const [tituloError, setTituloError] = useState("")
+    const [descripcionError, setDescripcionError] = useState("")
 
     const handleOpenChange = (abierto) => {
         if (onEditandoChange) {
@@ -31,13 +33,33 @@ export const TaskFormDialog = ({
             setDescripcionTarea(descripcion)
             setFechaLimiteTarea(fechaLimite)
             setColorSeleccionado(color)
+            setTituloError("")
+            setDescripcionError("")
         }
     }
 
-    const handleConfirmar = () => {
-        if (!tituloTarea.trim()) return
-        if (!descripcionTarea.trim()) return
-        if (!colorSeleccionado) return
+    const handleConfirmar = (e) => {
+        let hayError = false
+        
+        if (!tituloTarea.trim()) {
+            setTituloError("El título es obligatorio")
+            hayError = true
+        } else {
+            setTituloError("")
+        }
+        
+        if (!descripcionTarea.trim()) {
+            setDescripcionError("La descripción es obligatoria")
+            hayError = true
+        } else {
+            setDescripcionError("")
+        }
+        
+        if (hayError) {
+            e.preventDefault()
+            return
+        }
+        
         onConfirmar(tituloTarea, descripcionTarea, fechaLimiteTarea || null, colorSeleccionado)
     }
 
@@ -55,9 +77,14 @@ export const TaskFormDialog = ({
                             id="titulo-tarea"
                             placeholder="Escribe un título..."
                             value={tituloTarea}
-                            onChange={(e) => setTituloTarea(e.target.value)}
+                            onChange={(e) => {
+                                setTituloTarea(e.target.value)
+                                setTituloError("")
+                            }}
                             maxLength={50}
+                            style={tituloError ? { borderColor: "red" } : {}}
                         />
+                        {tituloError && <Text color="red" size="2">{tituloError}</Text>}
                     </label>
                     <label htmlFor="descripcion-tarea">
                         <Text as="div" size="2" mb="1" weight="bold">Descripción</Text>
@@ -65,9 +92,14 @@ export const TaskFormDialog = ({
                             id="descripcion-tarea"
                             placeholder="Escribe una descripción..."
                             value={descripcionTarea}
-                            onChange={(e) => setDescripcionTarea(e.target.value)}
+                            onChange={(e) => {
+                                setDescripcionTarea(e.target.value)
+                                setDescripcionError("")
+                            }}
                             maxLength={200}
+                            style={descripcionError ? { borderColor: "red" } : {}}
                         />
+                        {descripcionError && <Text color="red" size="2">{descripcionError}</Text>}
                     </label>
                     <label htmlFor="fecha-tarea">
                         <Text as="div" size="2" mb="1" weight="bold">
