@@ -301,3 +301,58 @@ body {
 :is(.dark, .dark-theme) :where(.radix-themes:not(.light, .light-theme)) {
     --color-background: #222831;
 }
+
+/* ============================================
+   ESTILOS RESPONSIVE
+   ============================================ */
+
+/* Breakpoints */
+:root {
+    --breakpoint-sm: 480px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+}
+
+/* Estilos responsive base */
+@media (max-width: 768px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 13px;
+    }
+}
+
+/* Column responsive */
+@media (max-width: 768px) {
+    .column-card {
+        min-width: 260px !important;
+        max-width: 300px !important;
+    }
+}
+
+/* Board Detail responsive */
+@media (max-width: 768px) {
+    .board-detail-columns {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        padding: 0 8px;
+    }
+}
+
+/* Brick responsive */
+@media (max-width: 480px) {
+    .brick-card {
+        padding: 8px !important;
+    }
+}
+
+/* Navbar responsive */
+@media (max-width: 480px) {
+    .navbar-container {
+        padding: 8px !important;
+    }
+}

@@ -52,7 +52,7 @@ export const Navbar = ({ showBackButton = false }) => {
     }
 
     return (
-        <Flex gap="2" as="div" justify={showBackButton ? "between" : "end"} p="2">
+        <Flex gap="2" as="div" justify={showBackButton ? "between" : "end"} p="2" className="navbar-container">
             {showBackButton && (
                 <IconButton variant="ghost" radius="full" onClick={() => navigate("/")}>
                     <ArrowLeftIcon width={26} height={26} />

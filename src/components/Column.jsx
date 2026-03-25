@@ -27,6 +27,7 @@ export const Column = ({ id, tableroId, titulo, color, tareas = TAREAS_VACIAS })
         <Card
             ref={setNodeRef}
             {...attributes}
+            className="column-card"
             style={{
                 ...style,
                 minHeight: 'calc(100vh - 160px)',

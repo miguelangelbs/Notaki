@@ -33,7 +33,7 @@ const Home = () => {
     <>
       <Navbar />
       <AdvertenciaDatos />
-      <Flex direction="column" gap="4" maxWidth="780px" mx="auto" p="4">
+      <Flex direction="column" gap="4" p="4" style={{ width: "100%", maxWidth: "780px", margin: "0 auto" }}>
         <DndContext
           collisionDetection={closestCenter}
           onDragStart={handleDragStart}

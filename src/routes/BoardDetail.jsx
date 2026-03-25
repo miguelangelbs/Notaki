@@ -84,7 +84,18 @@ const BoardDetail = () => {
             items={columnasLocales.map(c => c.id)}
             strategy={horizontalListSortingStrategy}
           >
-            <Flex direction="row" gap="4" justify="center" align="start">
+            <Flex 
+                direction="row" 
+                gap="4" 
+                justify="center" 
+                align="start"
+                className="board-detail-columns"
+                style={{ 
+                    overflowX: "auto",
+                    paddingBottom: "16px",
+                    width: "100%"
+                }}
+            >
               {columnasLocales.map((columna) => (
                 <Column
                   key={columna.id}
