@@ -1,18 +1,21 @@
 import { Card, DropdownMenu, Flex, IconButton, Text } from "@radix-ui/themes"
-import { GearIcon, DragHandleDots2Icon } from "@radix-ui/react-icons"
+import { GearIcon, DragHandleDots2Icon, ExclamationTriangleIcon, CrossCircledIcon } from "@radix-ui/react-icons"
 import { useNavigate } from "react-router-dom"
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { EditBoardDialog } from "./EditBoardDialog"
 import "../styles/Brick.css"
 import { useState } from "react"
+import { contarTareasPorEstado } from "../utils/dateUtils"
 
-export const Brick = ({ id, titulo = "Titulo Ejemplo", color = "gray" }) => {
+export const Brick = ({ id, titulo = "Titulo Ejemplo", color = "gray", tablero }) => {
 
     const navigate = useNavigate()
     const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id })
 
     const [menuAbierto, setMenuAbierto] = useState(false)
+
+    const { vencidas, urgentes } = tablero ? contarTareasPorEstado(tablero) : { vencidas: 0, urgentes: 0 }
 
     const style = {
         transform: CSS.Transform.toString(transform),
@@ -30,11 +33,32 @@ export const Brick = ({ id, titulo = "Titulo Ejemplo", color = "gray" }) => {
             {...attributes}
             onClick={() => navigate(`/board/${id}`)}
         >
-            <Flex align="center" justify="between" mt="4" mb="4">
+            <Flex align="center" justify="between" mt="4" mb="4" style={{ position: 'relative' }}>
                 <Text size="8" align="center" as="div" style={{ flex: 1 }}>
                     {titulo}
                 </Text>
-                <Flex gap="2">
+                <Flex
+                    align="center"
+                    gap="3"
+                    style={{ position: 'absolute', right: 0 }}
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    {(vencidas > 0 || urgentes > 0) && (
+                        <Flex direction="column" gap="1">
+                            {vencidas > 0 && (
+                                <Flex align="center" gap="1">
+                                    <CrossCircledIcon color="red" width={24} height={24} />
+                                    <Text size="4" style={{ color: 'red' }}>{vencidas}</Text>
+                                </Flex>
+                            )}
+                            {urgentes > 0 && (
+                                <Flex align="center" gap="1">
+                                    <ExclamationTriangleIcon color="yellow" width={24} height={24} />
+                                    <Text size="4" style={{ color: 'yellow' }}>{urgentes}</Text>
+                                </Flex>
+                            )}
+                        </Flex>
+                    )}
                     <IconButton
                         variant="ghost"
                         radius="full"
@@ -44,7 +68,6 @@ export const Brick = ({ id, titulo = "Titulo Ejemplo", color = "gray" }) => {
                     >
                         <DragHandleDots2Icon width={32} height={32} />
                     </IconButton>
-
                     <DropdownMenu.Root open={menuAbierto} onOpenChange={setMenuAbierto}>
                         <DropdownMenu.Trigger asChild>
                             <IconButton
@@ -56,7 +79,7 @@ export const Brick = ({ id, titulo = "Titulo Ejemplo", color = "gray" }) => {
                             </IconButton>
                         </DropdownMenu.Trigger>
                         <DropdownMenu.Content onClick={(e) => e.stopPropagation()}>
-                            <EditBoardDialog id={id} titulo={titulo} color={color} onClose={() => setMenuAbierto(false)}/>
+                            <EditBoardDialog id={id} titulo={titulo} color={color} onClose={() => setMenuAbierto(false)} />
                         </DropdownMenu.Content>
                     </DropdownMenu.Root>
                 </Flex>

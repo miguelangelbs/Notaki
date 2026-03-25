@@ -1,11 +1,11 @@
 import { AlertDialog, Button, Card, DropdownMenu, Flex, IconButton, Text } from "@radix-ui/themes"
-import { DotsVerticalIcon } from "@radix-ui/react-icons"
+import { DotsVerticalIcon, ExclamationTriangleIcon, CrossCircledIcon } from "@radix-ui/react-icons"
 import { useUser } from "../context/UserContext"
 import { EditTaskDialog } from "./EditTaskDialog"
 import { useState } from "react"
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
-import { formatearFecha } from "../utils/dateUtils"
+import { formatearFecha, obtenerEstadoFecha } from "../utils/dateUtils"
 
 export const Task = ({ id, tableroId, columnaId, titulo = "Nombre Ejemplo", descripcion = "Descripción", fechaLimite = null, color = "gray" }) => {
 
@@ -27,6 +27,40 @@ export const Task = ({ id, tableroId, columnaId, titulo = "Nombre Ejemplo", desc
 
     const handleEditandoChange = (abierto) => {
         setEditandoActivo(abierto)
+    }
+
+    const estadoFecha = obtenerEstadoFecha(fechaLimite)
+
+    const renderFecha = () => {
+        if (!fechaLimite) return null
+
+        if (estadoFecha === 'vencida') {
+            return (
+                <Flex align="center" gap="1">
+                    <CrossCircledIcon color="red" />
+                    <Text as="div" size="2" color="red" style={{ textDecoration: 'line-through' }}>
+                        {formatearFecha(fechaLimite)}
+                    </Text>
+                </Flex>
+            )
+        }
+
+        if (estadoFecha === 'urgente') {
+            return (
+                <Flex align="center" gap="1">
+                    <ExclamationTriangleIcon color="yellow" />
+                    <Text as="div" size="2" style={{ color: 'yellow' }}>
+                        {formatearFecha(fechaLimite)}
+                    </Text>
+                </Flex>
+            )
+        }
+
+        return (
+            <Text as="div" size="2" color="gray">
+                {formatearFecha(fechaLimite)}
+            </Text>
+        )
     }
 
     return (
@@ -89,9 +123,7 @@ export const Task = ({ id, tableroId, columnaId, titulo = "Nombre Ejemplo", desc
             </DropdownMenu.Root>
             <Text as="div" weight="bold" size="6" mb="3">{titulo}</Text>
             <Text as="div" mb="3">{descripcion}</Text>
-            {fechaLimite && (
-                <Text as="div" size="2" color="gray">{formatearFecha(fechaLimite)}</Text>
-            )}
+            {renderFecha()}
         </Card>
     )
 }

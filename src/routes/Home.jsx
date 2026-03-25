@@ -48,6 +48,7 @@ const Home = () => {
                 id={tablero.id}
                 titulo={tablero.titulo}
                 color={tablero.color}
+                tablero={tablero}
               />
             ))}
           </SortableContext>
@@ -57,6 +58,7 @@ const Home = () => {
                 id={activoBrick.id}
                 titulo={activoBrick.titulo}
                 color={activoBrick.color}
+                tablero={activoBrick}
               />
             )}
           </DragOverlay>

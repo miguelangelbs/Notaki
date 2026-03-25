@@ -122,11 +122,11 @@ export const Navbar = ({ showBackButton = false }) => {
             {/* AlertDialog para eliminar datos */}
             <AlertDialog.Root open={openAlertEliminar} onOpenChange={setOpenAlertEliminar}>
                 <AlertDialog.Content>
-                    <AlertDialog.Title>Eliminar datos locales</AlertDialog.Title>
-                    <AlertDialog.Description size="2">
-                        ¿Estás seguro de que quieres eliminar todos los datos locales? Esta acción no se puede deshacer.
+                    <AlertDialog.Title align="center">Eliminar datos locales</AlertDialog.Title>
+                    <AlertDialog.Description size="2" align="center">
+                        ¿Estás seguro de que quieres eliminar todos los datos locales? {<br />} Esta acción no se puede deshacer.
                     </AlertDialog.Description>
-                    <Flex gap="3" mt="4" justify="end">
+                    <Flex gap="3" mt="4" justify="center">
                         <AlertDialog.Cancel>
                             <Button variant="soft" color="gray">
                                 Cancelar
