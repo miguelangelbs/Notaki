@@ -63,7 +63,19 @@ const Home = () => {
             )}
           </DragOverlay>
         </DndContext>
-        {usuario.tableros.length < MAX_TABLEROS ? (
+        {usuario.tableros.length === 0 ? (
+          <Flex direction="column" gap="4" align="center">
+            <Callout.Root color="gray">
+              <Callout.Icon>
+                <InfoCircledIcon />
+              </Callout.Icon>
+              <Callout.Text>
+                Crea tu primer tablero para empezar a gestionar tus tareas y columnas
+              </Callout.Text>
+            </Callout.Root>
+            <AddBoardDialog />
+          </Flex>
+        ) : usuario.tableros.length < MAX_TABLEROS ? (
           <Flex justify="center" mt="3">
             <AddBoardDialog />
           </Flex>

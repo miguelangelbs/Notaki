@@ -42,9 +42,10 @@ export const Navbar = ({ showBackButton = false }) => {
         }
     }
 
+    /*
     const handleIniciarSesion = () => {
         console.log("Iniciar sesión - funcionalidad pendiente")
-    }
+    }*/
 
     const handleEliminarDatos = () => {
         handleResetCuenta()
@@ -76,10 +77,11 @@ export const Navbar = ({ showBackButton = false }) => {
                         <DropdownMenu.Item onSelect={(e) => e.preventDefault()} onClick={abrirDialogNombre}>
                             Cambiar Nombre
                         </DropdownMenu.Item>
-                        <DropdownMenu.Separator />
-                        <DropdownMenu.Item onSelect={(e) => e.preventDefault()} onClick={handleIniciarSesion}>
+                        {/* <DropdownMenu.Separator />*/}
+                        {/* TODO: Implementar sistema de autenticación */}
+                        {/* <DropdownMenu.Item onSelect={(e) => e.preventDefault()} onClick={handleIniciarSesion}>
                             Iniciar sesión
-                        </DropdownMenu.Item>
+                        </DropdownMenu.Item> */}
                         <DropdownMenu.Separator />
                         <DropdownMenu.Item color="red" onClick={() => setOpenAlertEliminar(true)}>
                             Eliminar datos locales
