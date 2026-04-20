@@ -107,11 +107,3 @@ src/
 4. **Organizar**: Arrastrar y soltar tableros, columnas y tareas para reordenar según necesidad.
 
 Los datos se guardan automáticamente en el navegador del usuario.
-
-## Contribución
-
-Las contribuciones son bienvenidas. Por favor, abrir un issue o pull request para suggestiones o mejoras.
-
-## Licencia
-
-MIT
