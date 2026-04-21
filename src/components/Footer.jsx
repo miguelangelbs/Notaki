@@ -4,7 +4,7 @@ const YEAR = new Date().getFullYear()
 
 export const Footer = () => {
     return (
-        <Flex justify="center" align="center" p="4" gap="2">
+        <Flex justify="center" align="center" p="4" gap="2" mt="8">
             <Text size="2" color="gray">
                 © {YEAR} Realizado por Miguel Ángel Bernal Sánchez
             </Text>

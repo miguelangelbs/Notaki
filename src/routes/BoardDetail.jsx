@@ -86,13 +86,13 @@ const BoardDetail = () => {
               direction="row"
               gap="4"
               align="start"
+              className="board-detail-scroll"
               style={{
-                overflowX: 'auto',
-                overflowY: 'hidden',
+                overflow: 'auto',
                 width: '100%',
+                height: '100%',
                 paddingBottom: '16px',
                 boxSizing: 'border-box',
-                flexShrink: 0
               }}
             >
               {columnasLocales.length === 0 ? (

@@ -386,3 +386,18 @@ body {
         font-size: var(--font-size-7) !important;
     }
 }
+
+.board-detail-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.board-detail-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+@media (min-width: 769px) {
+    .board-detail-scroll {
+        justify-content: center;
+    }
+}

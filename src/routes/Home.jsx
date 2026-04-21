@@ -11,6 +11,7 @@ import { useSortableTableros } from "../hooks/useSortableTableros"
 import { MAX_TABLEROS } from '../utils/constants'
 import { InfoCircledIcon } from "@radix-ui/react-icons"
 import { useState } from "react"
+import { Footer } from '../components/Footer'
 
 const Home = () => {
 
@@ -103,6 +104,7 @@ const Home = () => {
           </Flex>
         )}
       </Flex>
+      <Footer />
     </>
   )
 }

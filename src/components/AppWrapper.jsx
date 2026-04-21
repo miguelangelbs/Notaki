@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from '../routes/Home'
 import BoardDetail from '../routes/BoardDetail'
 import { UserProvider, useUser } from '../context/UserContext'
-import { Footer } from './Footer'
 
 const AppContent = () => {
   const { theme } = useUser();
@@ -17,7 +16,6 @@ const AppContent = () => {
               <Route path="/board/:id" element={<BoardDetail />} />
             </Routes>
           </Box>
-          <Footer />
         </Flex>
       </BrowserRouter>
     </Theme>
