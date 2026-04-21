@@ -4,7 +4,6 @@ Aplicación web de gestión de tareas tipo Kanban construida con React. Permite 
 
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=flat&logo=react)](https://es.react.dev)
 [![Vite](https://img.shields.io/badge/Vite-7-646CFF?style=flat&logo=vite)](https://vite.dev)
-[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 ## Características
 
@@ -32,7 +31,7 @@ Aplicación web de gestión de tareas tipo Kanban construida con React. Permite 
 
 ```bash
 # Clonar el repositorio
-git clone <url-del-repositorio>
+git clone https://github.com/miguelangelbs/Notaki.git
 cd proyectoGestorTareas
 
 # Instalar dependencias
