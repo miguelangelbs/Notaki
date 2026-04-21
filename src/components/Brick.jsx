@@ -1,5 +1,5 @@
 import { Card, DropdownMenu, Flex, IconButton, Text } from "@radix-ui/themes"
-import { GearIcon, DragHandleDots2Icon, ExclamationTriangleIcon, CrossCircledIcon } from "@radix-ui/react-icons"
+import { GearIcon, ExclamationTriangleIcon, CrossCircledIcon } from "@radix-ui/react-icons"
 import { useNavigate } from "react-router-dom"
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
@@ -23,6 +23,10 @@ export const Brick = ({ id, titulo = "Titulo Ejemplo", color = "gray", tablero }
         opacity: isDragging ? 0.4 : 1,
         backgroundColor: `var(--${color}-9)`,
         zIndex: isDragging ? 999 : 'auto',
+        cursor: isDragging ? 'grabbing' : 'grab',
+        userSelect: 'none',
+        WebkitUserSelect: 'none',
+        touchAction: 'none',
     }
 
     return (
@@ -31,6 +35,7 @@ export const Brick = ({ id, titulo = "Titulo Ejemplo", color = "gray", tablero }
             ref={setNodeRef}
             style={style}
             {...attributes}
+            {...listeners}
             onClick={() => navigate(`/board/${id}`)}
         >
             <Flex align="center" justify="between" mt="4" mb="4" style={{ position: 'relative' }}>
@@ -59,15 +64,6 @@ export const Brick = ({ id, titulo = "Titulo Ejemplo", color = "gray", tablero }
                             )}
                         </Flex>
                     )}
-                    <IconButton
-                        variant="ghost"
-                        radius="full"
-                        {...listeners}
-                        onClick={(e) => e.stopPropagation()}
-                        className={isDragging ? 'handle-dragging' : 'handle'}
-                    >
-                        <DragHandleDots2Icon width={32} height={32} />
-                    </IconButton>
                     <DropdownMenu.Root open={menuAbierto} onOpenChange={setMenuAbierto}>
                         <DropdownMenu.Trigger asChild>
                             <IconButton

@@ -32,11 +32,9 @@ const BoardDetail = () => {
     if (tablero) setColumnasLocales(tablero.columnas)
   }, [tablero])
 
-  if (!tablero) {
-    navigate('/')
-    return null
-  }
-
+  useEffect(() => {
+    if (!tablero) navigate('/')
+  }, [tablero, navigate])
 
   if (!tablero) return null
 
@@ -72,7 +70,7 @@ const BoardDetail = () => {
   return (
     <>
       <Navbar showBackButton={true} />
-      <Flex direction="column" gap="4" p="4">
+      <Flex direction="column" p="4" style={{ height: 'calc(100vh - 60px)', overflowX: 'hidden', overflowY: 'auto' }}>
         <Heading size="9" align="center" mb="4">{tablero.titulo}</Heading>
         <DndContext
           collisionDetection={closestCenter}
@@ -84,30 +82,21 @@ const BoardDetail = () => {
             items={columnasLocales.map(c => c.id)}
             strategy={horizontalListSortingStrategy}
           >
-            <Flex 
-                direction="row" 
-                gap="4" 
-                justify="center" 
-                align="start"
-                className="board-detail-columns"
-                style={{ 
-                    overflowX: "auto",
-                    paddingBottom: "16px",
-                    width: "100%"
-                }}
+            <Flex
+              direction="row"
+              gap="4"
+              align="start"
+              style={{
+                overflowX: 'auto',
+                overflowY: 'hidden',
+                width: '100%',
+                paddingBottom: '16px',
+                boxSizing: 'border-box',
+                flexShrink: 0
+              }}
             >
-              {columnasLocales.map((columna) => (
-                <Column
-                  key={columna.id}
-                  id={columna.id}
-                  tableroId={tablero.id}
-                  titulo={columna.titulo}
-                  color={columna.color}
-                  tareas={columna.tareas}
-                />
-              ))}
               {columnasLocales.length === 0 ? (
-                <Flex direction="column" gap="4" align="center">
+                <Flex direction="column" gap="4" align="center" style={{ width: '100%' }}>
                   <Callout.Root color="gray">
                     <Callout.Icon>
                       <InfoCircledIcon />
@@ -118,11 +107,25 @@ const BoardDetail = () => {
                   </Callout.Root>
                   <AddColumnDialog tableroId={tablero.id} />
                 </Flex>
-              ) : columnasLocales.length < MAX_COLUMNAS ? (
-                <Flex align="center" style={{ minHeight: 'calc(100vh - 160px)' }}>
-                  <AddColumnDialog tableroId={tablero.id} />
-                </Flex>
-              ) : null}
+              ) : (
+                <>
+                  {columnasLocales.map((columna) => (
+                    <Column
+                      key={columna.id}
+                      id={columna.id}
+                      tableroId={tablero.id}
+                      titulo={columna.titulo}
+                      color={columna.color}
+                      tareas={columna.tareas}
+                    />
+                  ))}
+                  {columnasLocales.length < MAX_COLUMNAS && (
+                    <Flex align="center" style={{ minHeight: 'calc(100vh - 160px)', flexShrink: 0 }}>
+                      <AddColumnDialog tableroId={tablero.id} />
+                    </Flex>
+                  )}
+                </>
+              )}
             </Flex>
           </SortableContext>
           <DragOverlay>

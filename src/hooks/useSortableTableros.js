@@ -1,5 +1,5 @@
 import { arrayMove } from "@dnd-kit/sortable"
-import { PointerSensor, useSensor, useSensors } from '@dnd-kit/core'
+import { PointerSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core'
 import { useUser } from "../context/UserContext"
 
 export const useSortableTableros = () => {
@@ -10,6 +10,12 @@ export const useSortableTableros = () => {
         useSensor(PointerSensor, {
             activationConstraint: {
                 distance: 8
+            }
+        }),
+        useSensor(TouchSensor, {
+            activationConstraint: {
+                delay: 250,
+                tolerance: 5
             }
         })
     )

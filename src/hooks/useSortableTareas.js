@@ -1,5 +1,5 @@
 import { arrayMove } from "@dnd-kit/sortable"
-import { PointerSensor, useSensor, useSensors } from '@dnd-kit/core'
+import { PointerSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core'
 import { useUser } from "../context/UserContext"
 
 export const useSortableTareas = (tableroId, columnas, setColumnasLocales) => {
@@ -10,6 +10,12 @@ export const useSortableTareas = (tableroId, columnas, setColumnasLocales) => {
         useSensor(PointerSensor, {
             activationConstraint: {
                 distance: 8
+            }
+        }),
+        useSensor(TouchSensor, {
+            activationConstraint: {
+                delay: 250,
+                tolerance: 5
             }
         })
     )
@@ -43,7 +49,6 @@ export const useSortableTareas = (tableroId, columnas, setColumnasLocales) => {
 
             const tareasReordenadas = arrayMove(columna.tareas, oldIndex, newIndex)
 
-            // Actualizar estado local inmediatamente
             setColumnasLocales(columnas.map(c =>
                 c.id === columnaOrigenId ? { ...c, tareas: tareasReordenadas } : c
             ))
@@ -60,7 +65,6 @@ export const useSortableTareas = (tableroId, columnas, setColumnasLocales) => {
             const nuevaPosicion = columnaDestino.tareas.findIndex(t => t.id === over.id)
             const posicionFinal = nuevaPosicion === -1 ? columnaDestino.tareas.length : nuevaPosicion
 
-            // Actualizar estado local inmediatamente
             const nuevasColumnas = columnas.map(c => {
                 if (c.id === columnaOrigenId) {
                     return { ...c, tareas: c.tareas.filter(t => t.id !== tareaId) }

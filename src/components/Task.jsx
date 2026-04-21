@@ -23,6 +23,12 @@ export const Task = ({ id, tableroId, columnaId, titulo = "Nombre Ejemplo", desc
         transition,
         opacity: isDragging ? 0.4 : 1,
         zIndex: isDragging ? 999 : 'auto',
+        position: "relative",
+        backgroundColor: `var(--${color}-9)`,
+        cursor: isDragging ? 'grabbing' : 'grab',
+        userSelect: 'none',
+        WebkitUserSelect: 'none',
+        touchAction: 'none',
     }
 
     const handleEditandoChange = (abierto) => {
@@ -68,12 +74,7 @@ export const Task = ({ id, tableroId, columnaId, titulo = "Nombre Ejemplo", desc
             ref={setNodeRef}
             {...attributes}
             {...listeners}
-            style={{
-                ...style,
-                position: "relative",
-                backgroundColor: `var(--${color}-9)`,
-                cursor: isDragging ? 'grabbing' : 'grab'
-            }}
+            style={style}
         >
             <DropdownMenu.Root open={menuAbierto} onOpenChange={setMenuAbierto}>
                 <DropdownMenu.Trigger asChild>
