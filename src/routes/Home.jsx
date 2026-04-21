@@ -1,7 +1,7 @@
-import { Callout, Flex } from "@radix-ui/themes"
+import { Callout, Flex, Heading } from "@radix-ui/themes"
 import { Brick } from "../components/Brick"
 import { Navbar } from "../components/Navbar"
-import { AdvertenciaDatos } from "../components/AdvertenciaDatos"
+//import { AdvertenciaDatos } from "../components/AdvertenciaDatos"
 import { AddBoardDialog } from "../components/AddBoardDialog"
 import { useUser } from "../context/UserContext"
 import { DndContext, closestCenter, DragOverlay } from '@dnd-kit/core'
@@ -32,7 +32,18 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <AdvertenciaDatos />
+      <Flex align="center" justify="center" gap="3" pt="4">
+        <Heading size="9" align="center" className="home-titulo">
+          Notaki
+        </Heading>
+        <img
+          src="/logo.png"
+          alt="Notaki logo"
+          style={{ width: '100px', height: '100px', objectFit: 'contain' }}
+          className="home-logo"
+        />
+      </Flex>
+      {/*<AdvertenciaDatos /> */}
       <Flex direction="column" gap="4" p="4" style={{ width: "100%", maxWidth: "780px", margin: "0 auto" }}>
         <DndContext
           collisionDetection={closestCenter}

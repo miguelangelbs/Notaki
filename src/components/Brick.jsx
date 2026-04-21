@@ -1,5 +1,5 @@
 import { Card, DropdownMenu, Flex, IconButton, Text } from "@radix-ui/themes"
-import { GearIcon, ExclamationTriangleIcon, CrossCircledIcon } from "@radix-ui/react-icons"
+import { GearIcon, DragHandleDots2Icon, ExclamationTriangleIcon, CrossCircledIcon } from "@radix-ui/react-icons"
 import { useNavigate } from "react-router-dom"
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
@@ -39,7 +39,24 @@ export const Brick = ({ id, titulo = "Titulo Ejemplo", color = "gray", tablero }
             onClick={() => navigate(`/board/${id}`)}
         >
             <Flex align="center" justify="between" mt="4" mb="4" style={{ position: 'relative' }}>
-                <Text size="8" align="center" as="div" style={{ flex: 1 }}>
+                <DragHandleDots2Icon
+                    width={20}
+                    height={20}
+                    style={{
+                        position: 'absolute',
+                        left: 0,
+                        opacity: 0.4,
+                        pointerEvents: 'none'
+                    }}
+                />
+                <Text
+                    size="8"
+                    weight="bold"                    
+                    align="center"
+                    as="div"
+                    className="brick-titulo"
+                    style={{ flex: 1}}
+                >
                     {titulo}
                 </Text>
                 <Flex

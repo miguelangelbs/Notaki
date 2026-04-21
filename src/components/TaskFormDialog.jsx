@@ -81,7 +81,7 @@ export const TaskFormDialog = ({
                                 setTituloTarea(e.target.value)
                                 setTituloError("")
                             }}
-                            maxLength={50}
+                            maxLength={30}
                             style={tituloError ? { borderColor: "red" } : {}}
                         />
                         {tituloError && <Text color="red" size="2">{tituloError}</Text>}
@@ -96,7 +96,7 @@ export const TaskFormDialog = ({
                                 setDescripcionTarea(e.target.value)
                                 setDescripcionError("")
                             }}
-                            maxLength={200}
+                            maxLength={100}
                             style={descripcionError ? { borderColor: "red" } : {}}
                         />
                         {descripcionError && <Text color="red" size="2">{descripcionError}</Text>}

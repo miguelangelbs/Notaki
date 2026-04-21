@@ -51,9 +51,10 @@ export const Column = ({ id, tableroId, titulo, color, tareas = TAREAS_VACIAS })
                         }}
                     />
                     <Text
-                        size="8"
+                        size="7"
                         weight="bold"
                         align="center"
+                        className="column-titulo"
                         {...listeners}
                         style={{
                             paddingRight: '40px',

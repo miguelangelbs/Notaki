@@ -357,3 +357,32 @@ body {
         padding: 8px !important;
     }
 }
+
+@media (max-width: 768px) {
+    .brick-titulo {
+        font-size: var(--font-size-4) !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: calc(100% - 120px);
+    }
+
+    .column-titulo {
+        font-size: var(--font-size-4) !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 150px;
+    }
+}
+
+@media (max-width: 768px) {
+    .home-logo {
+        width: 70px !important;
+        height: 70px !important;
+    }
+
+    .home-titulo {
+        font-size: var(--font-size-7) !important;
+    }
+}
